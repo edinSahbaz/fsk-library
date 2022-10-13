@@ -49,11 +49,12 @@ const AuthForm = () => {
     <>
       <div className={`${styles.main} animate__animated animate__slideInDown`}>
         <div className={`${styles.container}`}>
+          <h1>FSK - Online biblioteka</h1>
           <div>
             <h2>Dobrodošli</h2>
             <p>
-              Dobrodošli na website biblioteke Fakulteta za saobraćaj i
-              komunikacije.
+              Dobrodošli na website biblioteke{" "}
+              <strong>Fakulteta za saobraćaj i komunikacije</strong>.
               <br />
               Unesite svoje podatke da bi ste nastavili dalje.
             </p>
@@ -163,13 +164,12 @@ const AuthForm = () => {
         <div className={`${styles.container}`}>
           <div className={styles.imageContainer}>
             <Image
-              className="animate__animated animate__pulse animate__infinite animate__slow"
+              className="animate__animated animate__pulse animate__infinite animate__slower"
               src="/Logo.png"
               alt="logo"
-              width="240px"
-              height="200px"
+              width="340"
+              height="300"
             />
-            <h1>FSK - Online Biblioteka</h1>
           </div>
         </div>
       </div>
