@@ -29,6 +29,7 @@ const Searchbar = () => {
         <button class={styles.btn_search}>
           <Image
             class={styles.search_icon}
+            alt="search"
             width="30px"
             height="30px"
             src="/search.png"
@@ -36,7 +37,7 @@ const Searchbar = () => {
         </button>
       </div>
       <div class={styles.dropdown_main}>
-        <select name="authors" id="cars">
+        <select name="authors">
           <option value="Pisac">Pisac</option>
           <option value="PisacX">PisacX</option>
           <option value="PisacX">PisacX</option>
@@ -45,7 +46,7 @@ const Searchbar = () => {
           <option value="PisacX">PisacX</option>
         </select>
 
-        <select name="Dodati poslije" id="cars">
+        <select name="Dodati poslije">
           <option value="Pisac">Dodati poslije</option>
           <option value="PisacX">PisacX</option>
           <option value="PisacX">PisacX</option>
