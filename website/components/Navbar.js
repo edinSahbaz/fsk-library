@@ -5,34 +5,38 @@ import Image from "next/image";
 const Navbar = () => {
   return (
     <nav className={styles.nav_bar}>
-      <div className={styles.left_part}>
-        <div>
-          <Image
-            className={styles.logo}
-            src="/Logo.png"
-            width="50px"
-            height="50px"
-          ></Image>
-        </div>
-        <div></div>
-      </div>
+      <Link href="/">
+        <a className={styles.left_part}>
+          <div>
+            <Image
+              className={styles.logo}
+              src="/Logo.png"
+              width="50px"
+              height="50px"
+            ></Image>
+          </div>
+          <div className={styles.headline}>
+            <h2>FSK Biblioteka</h2>
+          </div>
+        </a>
+      </Link>
 
       <div className={styles.middle_part}>
         <Link href="/">
-          <a>Početna</a>
+          <a className={styles.home_link}>Početna</a>
         </Link>
 
         <Link href="/books">
-          <a>Knjige</a>
+          <a className={styles.books_link}>Knjige</a>
         </Link>
 
         <Link href="/contact">
-          <a>Kontakt</a>
+          <a className={styles.contact_link}>Kontakt</a>
         </Link>
       </div>
 
       <div className={styles.right_part}>
-        <button>Login</button>
+        <button className={styles.btn_login}>Login / Register</button>
       </div>
     </nav>
   );

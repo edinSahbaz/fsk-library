@@ -1,0 +1,108 @@
+.main {
+  display: flex;
+}
+
+.searchbar_main {
+  border: 1px solid rgb(201, 201, 201);
+  border-radius: 30px;
+  padding: 10px;
+  display: flex;
+  flex: 1;
+}
+
+.headline {
+  font-size: 45px;
+  font-weight: 500;
+}
+
+.searchbar {
+  width: 100%;
+  border: none;
+  margin-left: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.tags {
+  display: flex;
+  background-color: pink;
+  vertical-align: middle;
+  border-left: 1px solid rgb(201, 201, 201);
+}
+
+.radio_toolbar {
+  display: flex;
+  border-left: 1px solid rgb(201, 201, 201);
+  padding-left: 10px;
+}
+
+.radio_toolbar label {
+  transition: background-color 0.15s;
+  transition: color 0.15s;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+}
+
+.radio_toolbar input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio_toolbar label {
+  display: inline-block;
+  background-color: white;
+  padding: 8px 15px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+}
+
+.radio_toolbar input[type="radio"]:checked + label {
+  background-color: rgb(55, 122, 181);
+  border-color: rgb(55, 122, 181);
+  color: white;
+  border-radius: 20px;
+}
+
+.dropdown_main {
+  margin-top: 30px;
+}
+
+.dropdown_main select {
+  border-radius: 20px;
+  font-size: 14px;
+  background-color: rgb(247, 247, 247);
+  width: 200px;
+  border: none;
+  margin-right: 30px;
+  padding-left: 20px;
+  padding-right: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  outline: none;
+}
+
+.btn_search {
+  background-color: rgb(55, 122, 181);
+  height: 56px;
+  width: 56px;
+  border: none;
+  margin-left: 10px;
+  border-radius: 28px;
+  transition: opacity 0.15s;
+  cursor: pointer;
+}
+
+.btn_search:hover {
+  opacity: 0.8;
+}
+
+.btn_search:active {
+  opacity: 0.7;
+}
