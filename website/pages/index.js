@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Biblioteka | Fakultet za saobraćaj i komunikacije UNSA</title>
+        <title>eBiblioteka | Fakultet za saobraćaj i komunikacije UNSA</title>
         <meta
           name="description"
           content="Website biblioteke Fakulteta za saobraćaj i komunikacije Univerziteta u Sarajevu."

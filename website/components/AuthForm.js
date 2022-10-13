@@ -4,9 +4,10 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
 import Link from "next/link";
 import Image from "next/image";
+import { doc, setDoc } from "firebase/firestore";
 
 const AuthForm = () => {
   const [currentYear, setCurrentYear] = useState("");
@@ -26,12 +27,16 @@ const AuthForm = () => {
       .then((res) => console.log(res.user))
       .catch((err) => setError(err));
 
-    setEmail("");
-    setPassword("");
+    const userData = { name, surname, index };
+
+    const userDoc = doc(db, "users", email);
+    setDoc(userDoc, userData);
   };
 
   const login = () => {
-    signInWithEmailAndPassword(auth, email, passwrod);
+    signInWithEmailAndPassword(auth, email, passwrod)
+      .then((res) => console.log(res.user))
+      .catch((err) => setError(err));
   };
 
   useEffect(() => {
@@ -45,13 +50,18 @@ const AuthForm = () => {
     setCurrentYear(year);
   }, []);
 
+  useEffect(() => {
+    if (passwrod !== confirmPasswrod) {
+    }
+  }, [passwrod, confirmPasswrod]);
+
   return (
     <>
       <div className={`${styles.main} animate__animated animate__slideInDown`}>
         <div className={`${styles.container}`}>
-          <h1>FSK - Online biblioteka</h1>
+          <h1 className={`${styles.title}`}>FSK - eBiblioteka</h1>
           <div>
-            <h2>Dobrodošli</h2>
+            <h2 className={styles.subtitle}>Dobrodošli</h2>
             <p>
               Dobrodošli na website biblioteke{" "}
               <strong>Fakulteta za saobraćaj i komunikacije</strong>.
@@ -65,9 +75,9 @@ const AuthForm = () => {
 
           <div>
             {method === "login" ? (
-              <h2 className={styles.title}>Prijavi se</h2>
+              <h2 className={styles.subtitle}>Prijavi se</h2>
             ) : (
-              <h2 className={styles.title}>Registruj se</h2>
+              <h2 className={styles.subtitle}>Registruj se</h2>
             )}
             {method === "login" ? (
               <p className={styles.prompt}>
@@ -97,7 +107,7 @@ const AuthForm = () => {
             onSubmit={(e) => e.preventDefault()}
           >
             {method === "register" && (
-              <div>
+              <div className={styles.nameSurname}>
                 <input
                   required
                   className={styles.inputs}
@@ -144,19 +154,28 @@ const AuthForm = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             {method === "register" && (
-              <input
-                required
-                className={styles.inputs}
-                type="password"
-                placeholder="Potvrda lozinke"
-                value={confirmPasswrod}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+              <>
+                <input
+                  required
+                  className={styles.inputs}
+                  type="password"
+                  placeholder="Potvrda lozinke"
+                  value={confirmPasswrod}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                {passwrod !== confirmPasswrod && (
+                  <p className={styles.passwords}>Lozinke se ne podudaraju!</p>
+                )}
+              </>
             )}
             {method === "login" ? (
-              <button onClick={login}>Prijavi se</button>
+              <button className={styles.btn} onClick={login}>
+                Prijavi se
+              </button>
             ) : (
-              <button onClick={register}>Registruj se</button>
+              <button className={styles.btn} onClick={register}>
+                Registruj se
+              </button>
             )}
           </form>
         </div>
