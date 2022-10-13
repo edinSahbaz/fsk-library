@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Searchbar from "../components/Searchbar";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -12,8 +13,9 @@ export default function Home() {
         />
         <link rel="icon" href="/logo.png" />
       </Head>
-
-      <main></main>
+      <main>
+        <Searchbar />
+      </main>
     </div>
   );
 }

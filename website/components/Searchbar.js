@@ -1,0 +1,61 @@
+import styles from "../styles/Searchbar.module.css";
+import Image from "next/image";
+
+const Searchbar = () => {
+  return (
+    <div>
+      <div>
+        <h1 className={styles.headline}>Online Biblioteka</h1>
+      </div>
+
+      <div className={styles.main}>
+        <div className={styles.searchbar_main}>
+          <input
+            className={styles.searchbar}
+            placeholder="Pretraži biblioteku..."
+          ></input>
+
+          <div class={styles.radio_toolbar}>
+            <input type="radio" id="radio1" name="radios" defaultChecked />
+            <label for="radio1">Sva polja</label>
+
+            <input type="radio" id="radio2" name="radios" />
+            <label for="radio2">Pisci</label>
+
+            <input type="radio" id="radio3" name="radios" />
+            <label for="radio3">Naslovi</label>
+          </div>
+        </div>
+        <button class={styles.btn_search}>
+          <Image
+            class={styles.search_icon}
+            width="30px"
+            height="30px"
+            src="/search.png"
+          />
+        </button>
+      </div>
+      <div class={styles.dropdown_main}>
+        <select name="authors" id="cars">
+          <option value="Pisac">Pisac</option>
+          <option value="PisacX">PisacX</option>
+          <option value="PisacX">PisacX</option>
+          <option value="PisacX">PisacX</option>
+          <option value="PisacX">PisacX</option>
+          <option value="PisacX">PisacX</option>
+        </select>
+
+        <select name="Dodati poslije" id="cars">
+          <option value="Pisac">Dodati poslije</option>
+          <option value="PisacX">PisacX</option>
+          <option value="PisacX">PisacX</option>
+          <option value="PisacX">PisacX</option>
+          <option value="PisacX">PisacX</option>
+          <option value="PisacX">PisacX</option>
+        </select>
+      </div>
+    </div>
+  );
+};
+
+export default Searchbar;

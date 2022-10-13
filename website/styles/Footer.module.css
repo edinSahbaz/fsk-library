@@ -1,0 +1,16 @@
+.footer_main {
+  background-color: rgb(55, 122, 181);
+  padding-left: 50px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.footer_text {
+  color: white;
+  line-height: 1.7;
+}
+
+.line {
+  width: 250px;
+  border-bottom: 1px solid white;
+}
