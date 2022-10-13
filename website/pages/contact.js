@@ -1,10 +1,10 @@
 import Head from "next/head";
-import Searchbar from "../components/Searchbar";
-import styles from "../styles/Home.module.css";
+import ContactForm from "../components/ContactForm";
+import styles from "../styles/Contact.module.css";
 
 export default function Contact() {
   return (
-    <div>
+    <div className={styles.contact_page}>
       <Head>
         <title>Biblioteka | Fakultet za saobraćaj i komunikacije</title>
         <meta
@@ -14,7 +14,11 @@ export default function Contact() {
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <h1>Test</h1>
+        <div className={styles.contactus_text}>
+          <h1>Kontaktirajte nas</h1>
+        </div>
+
+        <ContactForm />
       </main>
     </div>
   );

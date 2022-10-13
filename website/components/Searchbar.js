@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Searchbar = () => {
   return (
-    <div>
+    <div className={styles.searchbar_element}>
       <div>
         <h1 className={styles.headline}>Online Biblioteka</h1>
       </div>
