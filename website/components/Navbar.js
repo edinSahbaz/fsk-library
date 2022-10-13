@@ -1,7 +1,6 @@
 import styles from "../styles/Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import AuthForm from "./AuthForm";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -9,8 +8,6 @@ const Navbar = () => {
 
   return (
     <nav className={styles.nav_bar}>
-      {show && <AuthForm setShow={setShow} />}
-
       <Link href="/">
         <a className={styles.left_part}>
           <div>
