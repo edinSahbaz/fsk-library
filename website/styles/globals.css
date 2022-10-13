@@ -3,12 +3,16 @@ body {
   padding: 0;
   margin: 0;
   font-family: Roboto;
+
+  /* remove for production */
+  margin-top: 100px;
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* remove for production */
 main {
   margin-top: 100px;
   height: 900px;
