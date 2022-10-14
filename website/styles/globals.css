@@ -4,6 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  background: #f6f9fc;
 }
 
 * {
@@ -13,7 +14,23 @@ body {
 
 main {
   margin-top: 100px;
-  height: 900px;
   margin-left: 30px;
   margin-right: 30px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+  border-left: 1px solid #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
 }

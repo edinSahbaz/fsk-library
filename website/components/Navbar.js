@@ -3,47 +3,67 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "firebase/auth";
 import { auth } from "../lib/firebase";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const router = useRouter();
+
   const logout = () => {
     signOut(auth);
   };
 
   return (
-    <nav className={styles.nav_bar}>
+    <nav
+      className={`${styles.nav_bar} animate__animated animate__slideInDown animate__faster`}
+    >
       <Link href="/">
         <a className={styles.left_part}>
-          <div>
+          <div className={styles.logo}>
             <Image
-              className={styles.logo}
               alt="logo"
               src="/Logo.png"
               width="50px"
               height="50px"
             ></Image>
           </div>
-          <div className={styles.headline}>
-            <h2>FSK Biblioteka</h2>
-          </div>
+          <h2 className={styles.headline}>eBiblioteka - FSK UNSA</h2>
         </a>
       </Link>
 
       <div className={styles.middle_part}>
         <Link href="/">
-          <a className={styles.home_link}>Početna</a>
+          <span
+            className={`${styles.link} ${
+              router.pathname === "/" ? styles.active : ""
+            }`}
+          >
+            Početna
+          </span>
         </Link>
 
         <Link href="/knjige">
-          <a className={styles.books_link}>Knjige</a>
+          <span
+            className={`${styles.link} ${
+              router.pathname === "/knjige" ? styles.active : ""
+            }`}
+          >
+            Knjige
+          </span>
         </Link>
 
         <Link href="/kontakt">
-          <a className={styles.contact_link}>Kontakt</a>
+          <span
+            className={`${styles.link} ${
+              router.pathname === "/kontakt" ? styles.active : ""
+            }`}
+          >
+            Kontakt
+          </span>
         </Link>
       </div>
 
       <div className={styles.right_part}>
-        <button className={styles.btn_login} onClick={logout}>
+        <button className={styles.btn} onClick={logout}>
           Odjavi se
         </button>
       </div>

@@ -5,7 +5,6 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
-import Link from "next/link";
 import Image from "next/image";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -220,7 +219,8 @@ const AuthForm = () => {
       </div>
 
       <p className={`${styles.copyright} animate__animated animate__slideInUp`}>
-        © Fakultet za saobraćaj i komunikacije UNSA {currentYear}
+        © {currentYear} Fakultet za saobraćaj i komunikacije Univerziteta u
+        Sarajevu | Sva prava zadržana
       </p>
     </>
   );
