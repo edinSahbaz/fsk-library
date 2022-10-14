@@ -3,7 +3,7 @@ import styles from "../styles/ContactForm.module.css";
 const ContactForm = () => {
   return (
     <div className={styles.contact_main}>
-      <div className={styles.contact_form} id="test">
+      <form className={styles.contact_form}>
         <div className={styles.contact_input_fullname}>
           <div>
             <p>Ime i prezime</p>
@@ -48,7 +48,7 @@ const ContactForm = () => {
         <div className={styles.contact_btn_send}>
           <button className={styles.btn_send}>Pošalji</button>
         </div>
-      </div>
+      </form>
 
       <div className={styles.contact_map}>
         <iframe
