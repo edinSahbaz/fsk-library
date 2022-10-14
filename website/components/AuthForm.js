@@ -74,12 +74,19 @@ const AuthForm = () => {
     }
   }, [passwrod, confirmPasswrod]);
 
+  useEffect(() => {
+    if (method === "register") {
+      setEmail("");
+      setPassword("");
+    }
+  }, [method]);
+
   return (
     <>
       <div className={`${styles.main} animate__animated animate__slideInDown`}>
         <div className={`${styles.container}`}>
           <h1 className={`${styles.title}`}>FSK - eBiblioteka</h1>
-          <div>
+          <div className={styles.intro}>
             <h2 className={styles.subtitle}>Dobrodošli</h2>
             <p>
               Dobrodošli na website biblioteke{" "}

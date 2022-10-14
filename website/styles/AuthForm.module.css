@@ -22,7 +22,7 @@
   flex-direction: column;
   align-items: center;
   width: 80%;
-  gap: 16px;
+  gap: 14px;
 }
 
 .notice {
@@ -65,18 +65,25 @@
 }
 
 .title {
-  font-size: 4em;
+  font-size: 3.2em;
   font-weight: 600;
+  margin: 0;
+  margin-top: 0.6em;
+}
+
+.intro {
+  margin: 1.6em 0;
 }
 
 .subtitle {
   font-size: 2em;
+  margin: -0.2em 0;
 }
 
 .inputs {
   border: 0;
   padding: 12px;
-  background: rgb(220, 220, 220);
+  background: rgb(240, 240, 240);
   border-radius: 6px;
   width: 100%;
 }
@@ -89,6 +96,7 @@
   border-radius: 6px;
   cursor: pointer;
   width: 100%;
+  font-size: 16px;
 }
 
 .btn:hover {
