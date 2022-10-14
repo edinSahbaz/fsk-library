@@ -5,7 +5,6 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
-import Link from "next/link";
 import Image from "next/image";
 import { doc, setDoc } from "firebase/firestore";
 

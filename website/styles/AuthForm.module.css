@@ -1,5 +1,6 @@
 .main {
   display: flex;
+  background: white;
 }
 
 .container {
@@ -15,6 +16,7 @@
   margin: 0;
   padding-left: 40px;
   height: 40px;
+  background: white;
 }
 
 .authForm {
