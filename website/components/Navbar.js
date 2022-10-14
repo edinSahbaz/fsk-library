@@ -33,11 +33,11 @@ const Navbar = () => {
           <a className={styles.home_link}>Početna</a>
         </Link>
 
-        <Link href="/books">
+        <Link href="/knjige">
           <a className={styles.books_link}>Knjige</a>
         </Link>
 
-        <Link href="/contact">
+        <Link href="/kontakt">
           <a className={styles.contact_link}>Kontakt</a>
         </Link>
       </div>
