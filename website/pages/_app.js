@@ -1,3 +1,4 @@
+import "animate.css";
 import Layout from "../components/Layout";
 import "../styles/globals.css";
 
