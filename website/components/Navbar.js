@@ -13,7 +13,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`${styles.nav_bar} animate__animated animate__slideInDown`}>
+    <nav
+      className={`${styles.nav_bar} animate__animated animate__slideInDown animate__faster`}
+    >
       <Link href="/">
         <a className={styles.left_part}>
           <div className={styles.logo}>
