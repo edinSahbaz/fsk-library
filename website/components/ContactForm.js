@@ -54,7 +54,7 @@ const ContactForm = () => {
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11507.954913001047!2d18.3990697!3d43.8560623!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xebf148def438abc2!2sFaculty%20of%20Traffic%20and%20Communications!5e0!3m2!1sen!2sba!4v1665698562110!5m2!1sen!2sba"
           width="100%"
-          height="450"
+          height="560"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
