@@ -1,8 +1,14 @@
 import styles from "../styles/Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { signOut } from "firebase/auth";
+import { auth } from "../lib/firebase";
 
 const Navbar = () => {
+  const logout = () => {
+    signOut(auth);
+  };
+
   return (
     <nav className={styles.nav_bar}>
       <Link href="/">
@@ -10,6 +16,7 @@ const Navbar = () => {
           <div>
             <Image
               className={styles.logo}
+              alt="logo"
               src="/Logo.png"
               width="50px"
               height="50px"
@@ -36,7 +43,9 @@ const Navbar = () => {
       </div>
 
       <div className={styles.right_part}>
-        <button className={styles.btn_login}>Login / Register</button>
+        <button className={styles.btn_login} onClick={logout}>
+          Odjavi se
+        </button>
       </div>
     </nav>
   );
