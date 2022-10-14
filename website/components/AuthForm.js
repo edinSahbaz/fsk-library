@@ -21,6 +21,25 @@ const AuthForm = () => {
   const [method, setMethod] = useState("login");
 
   const register = () => {
+    if (
+      name.length < 1 ||
+      surname.length < 1 ||
+      email.length < 1 ||
+      index.length < 1 ||
+      passwrod.length < 1
+    ) {
+      alert("Popunite sva polja!");
+      return;
+    }
+
+    if (passwrod !== confirmPasswrod) return;
+
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@fsk.unsa.ba$/;
+    if (!email.match(validRegex)) {
+      alert("Koristite službenu @fsk.unsa.ba email adresu!");
+      return;
+    }
+
     setError("");
 
     createUserWithEmailAndPassword(auth, email, passwrod)
