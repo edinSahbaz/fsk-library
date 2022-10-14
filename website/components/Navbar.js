@@ -1,10 +1,13 @@
 import styles from "../styles/Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../lib/firebase";
 
 const Navbar = () => {
-  const [show, setShow] = useState(false);
+  const logout = () => {
+    signOut(auth);
+  };
 
   return (
     <nav className={styles.nav_bar}>
@@ -40,8 +43,8 @@ const Navbar = () => {
       </div>
 
       <div className={styles.right_part}>
-        <button className={styles.btn_login} onClick={() => setShow(true)}>
-          Prijava / Registracija
+        <button className={styles.btn_login} onClick={logout}>
+          Odjavi se
         </button>
       </div>
     </nav>
