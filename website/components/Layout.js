@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Preloader from "./Preloader";
 
 const Layout = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -69,6 +70,7 @@ const Layout = ({ children }) => {
               )}
             </>
           )}
+          {loading && <Preloader />}
         </>
       </authContext.Provider>
     </>
