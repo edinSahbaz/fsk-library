@@ -11,7 +11,9 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className={styles.footer_main}>
+    <div
+      className={`${styles.footer_main} animate__animated animate__slideInUp`}
+    >
       <div className={styles.info}>
         <div className={styles.logos}>
           <Image
