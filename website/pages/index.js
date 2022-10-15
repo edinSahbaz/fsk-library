@@ -1,7 +1,11 @@
+import BookDisplay from "../components/BookDisplay";
+import Searchbar from "../components/Searchbar";
+
 export default function Home() {
   return (
     <div>
-      <div style={{ height: "100vh" }}></div>
+      <Searchbar />
+      <BookDisplay />
     </div>
   );
 }
