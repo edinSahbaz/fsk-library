@@ -7,6 +7,7 @@ import { async } from "@firebase/util";
 const BookDisplay = () => {
   const [books, setBooks] = useState(null);
 
+  // Get the collection of books from firebase
   useEffect(() => {
     (async () => {
       const booksCollRef = collection(db, "books");
@@ -24,8 +25,22 @@ const BookDisplay = () => {
     <div className={styles.main}>
       {books &&
         books.map((book) => (
-          <div key={book.id}>
-            <h1>{book.name}</h1>
+          <div className={styles.book_card} key={book.id}>
+            <div className={styles.book_photo}></div>
+            <div className={styles.book_details}>
+              <div>
+                <label>Naziv knjige</label>
+                <p>{book.name}</p>
+              </div>
+              <div>
+                <label>Pisac</label>
+                <p>{book.author}</p>
+              </div>
+              <div>
+                <label>Kolicina</label>
+                <p>{book.quantity}</p>
+              </div>
+            </div>
           </div>
         ))}
     </div>

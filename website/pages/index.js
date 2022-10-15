@@ -6,7 +6,6 @@ export default function Home() {
     <div>
       <Searchbar />
       <BookDisplay />
-      <div style={{ height: "100vh" }}></div>
     </div>
   );
 }
