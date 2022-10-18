@@ -10,6 +10,7 @@ const BookDetails = () => {
   const { bookId } = router.query;
   const [book, setBook] = useState(null);
 
+  // Get the current book
   useEffect(() => {
     const userRef = doc(db, "books", bookId);
 
@@ -23,6 +24,7 @@ const BookDetails = () => {
     })();
   }, []);
 
+  //Send the current book to bookRequests
   const requestBook = () => {
     (async () => {
       const bookRequestsRef = collection(db, "bookRequests");

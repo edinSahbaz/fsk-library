@@ -1,3 +1,4 @@
+/* root div */
 .root_div {
   margin-bottom: 50px;
   margin-left: 30px;
@@ -5,11 +6,13 @@
   margin-top: 60px;
 }
 
+/* top div (there is a top and a bottom div) */
 .top_div {
   display: flex;
   flex-direction: row;
 }
 
+/* left div of the top div */
 .left_div {
   flex: 1;
   align-items: center;
@@ -18,12 +21,14 @@
   border: 1px solid black;
 }
 
+/* right div of the top div */
 .right_div {
   height: 300px;
   flex: 2;
   margin-left: 20px;
 }
 
+/* every label in the root div */
 .root_div label {
   user-select: none;
   color: rgb(87, 100, 126);
@@ -31,6 +36,7 @@
   margin-bottom: 0px;
 }
 
+/* every h2 nad p tag in root div */
 .root_div h2,
 .root_div p {
   margin-top: 0px;
@@ -38,11 +44,13 @@
   margin-left: 5px;
 }
 
+/* about book div */
 .about_book {
   font-size: 14px;
   font-style: italic;
 }
 
+/* div that contains the quantity text and button*/
 .quantity_div {
   display: flex;
   align-items: center;
@@ -50,10 +58,12 @@
   margin-top: 10px;
 }
 
+/* text of the quantity div  */
 .quantity_text {
   flex: 1;
 }
 
+/* button for reserving books, (right part of quantity div) */
 .btn_reserve_book_div button {
   height: 30px;
   width: 150px;
@@ -74,6 +84,7 @@
   opacity: 0.7;
 }
 
+/* line that is shown above and below about book text */
 .line {
   border-bottom: 1px solid rgb(87, 100, 126);
   margin-left: 10px;
@@ -82,28 +93,34 @@
   margin-bottom: 5px;
 }
 
+/* bottom div */
 .bottom_div {
   display: flex;
   margin-top: 30px;
 }
 
+/* every h4 tag in bottom div */
 .bottom_div h4 {
   margin-bottom: 5px;
 }
 
+/* left div of the bottom div */
 .about_book_div {
   flex: 1;
 }
 
+/* every p tag in about book div */
 .about_book_div p {
   color: rgb(87, 100, 126);
 }
 
+/* right div of the bottom div */
 .about_author_div {
   flex: 2;
   margin-left: 20px;
 }
 
+/* every p tag in about author div */
 .about_author_div p {
   font-style: italic;
   color: rgb(87, 100, 126);
