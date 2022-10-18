@@ -2,46 +2,46 @@ import styles from "../styles/BookDisplay.module.css";
 import { db } from "../lib/firebase";
 import { collection, doc, getDocs } from "firebase/firestore";
 import { useState, useEffect, useContext } from "react";
-import { async } from "@firebase/util";
+import Link from "next/link";
+import Image from "next/image";
+
+import { useBooks } from "./Layout";
 
 const BookDisplay = () => {
-  const [books, setBooks] = useState(null);
-
-  // Get the collection of books from firebase
-  useEffect(() => {
-    (async () => {
-      const booksCollRef = collection(db, "books");
-      const bookSnapshots = await getDocs(booksCollRef);
-      const docs = bookSnapshots.docs.map((doc) => {
-        const data = doc.data();
-        data.id = doc.id;
-        return data;
-      });
-      setBooks(docs);
-    })();
-  }, []);
+  const { books } = useBooks();
 
   return (
     <div className={styles.main}>
       {books &&
         books.map((book) => (
-          <div className={styles.book_card} key={book.id}>
-            <div className={styles.book_photo}></div>
-            <div className={styles.book_details}>
-              <div>
-                <label>Naziv knjige</label>
-                <p>{book.name}</p>
+          <Link href={"/knjige/" + book.id} key={book.id}>
+            <div
+              className={`${styles.book_card} animate__animated animate__fadeIn animate__faster`}
+            >
+              <div className={styles.book_photo}>
+                <Image
+                  src="/TempBookImage.jpg"
+                  width="250px"
+                  height="240px"
+                ></Image>
               </div>
-              <div>
-                <label>Pisac</label>
-                <p>{book.author}</p>
-              </div>
-              <div>
-                <label>Kolicina</label>
-                <p>{book.quantity}</p>
+              <div className={styles.book_details}>
+                <div>
+                  <label>Naziv knjige</label>
+                  <p>{book.name}</p>
+                </div>
+                <div>
+                  <label>Pisac</label>
+                  <p>{book.author}</p>
+                </div>
+
+                <div>
+                  <label>Kolicina</label>
+                  <p>{book.quantity}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
     </div>
   );

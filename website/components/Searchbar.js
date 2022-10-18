@@ -32,7 +32,7 @@ const Searchbar = () => {
             alt="search"
             width="30px"
             height="30px"
-            src="/search.png"
+            src="/Search.png"
           />
         </button>
       </div>

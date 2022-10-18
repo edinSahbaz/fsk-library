@@ -2,16 +2,20 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthForm from "./AuthForm";
 import { authContext } from "./../lib/context/AuthContext";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, createContext } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import Preloader from "./Preloader";
+
+const Context = createContext();
 
 const Layout = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [userDB, setUserDB] = useState(null);
+
+  const [books, setBooks] = useState(null);
 
   useEffect(() => {
     onAuthStateChanged(auth, (userVar) => {
@@ -47,16 +51,34 @@ const Layout = ({ children }) => {
     getUserDBInfo();
   }, [user]);
 
+  // Get the collection of books from firebase
+  useEffect(() => {
+    (async () => {
+      const booksCollRef = collection(db, "books");
+      const bookSnapshots = await getDocs(booksCollRef);
+      const docs = bookSnapshots.docs.map((doc) => {
+        const data = doc.data();
+        data.id = doc.id;
+        return data;
+      });
+      setBooks(docs);
+    })();
+  }, []);
+
   useEffect(() => {
     if (userDB === null) return;
     console.log(userDB);
+    console.log(books);
     setLoading(false);
   }, [userDB]);
+
+  // expose to the context
+  const exposedToContext = { books };
 
   return (
     <>
       <authContext.Provider value={{ user, userDB }}>
-        <>
+        <Context.Provider value={exposedToContext}>
           {!loading && (
             <>
               {!user ? (
@@ -71,10 +93,13 @@ const Layout = ({ children }) => {
             </>
           )}
           {loading && <Preloader />}
-        </>
+        </Context.Provider>
       </authContext.Provider>
     </>
   );
 };
+
+// export useBooks hook
+export const useBooks = () => useContext(Context);
 
 export default Layout;
