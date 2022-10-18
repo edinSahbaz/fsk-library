@@ -60,6 +60,16 @@ const Navbar = () => {
             Kontakt
           </span>
         </Link>
+
+        <Link href="/admin">
+          <span
+            className={`${styles.link} ${
+              router.pathname === "/admin" ? styles.active : ""
+            }`}
+          >
+            Admin
+          </span>
+        </Link>
       </div>
 
       <div className={styles.right_part}>
