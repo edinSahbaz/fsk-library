@@ -1,0 +1,16 @@
+.root_div {
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+}
+
+.left_div {
+  background-color: lightblue;
+  height: 300px;
+  flex: 1;
+}
+.right_div {
+  background-color: lightpink;
+  height: 300px;
+  flex: 1;
+}

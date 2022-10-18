@@ -17,6 +17,11 @@
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
 
+.book_card:hover {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
 /* photo div */
 .book_photo {
   height: 240px;
