@@ -47,12 +47,7 @@ const BookDetails = () => {
           </div>
 
           <div className={styles.line}></div>
-          <p className={styles.about_book}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat
-            impedit maxime rerum, ab eum consequatur illo assumenda natus. Animi
-            quas consequuntur eligendi dolores possimus corporis iure iste quis
-            laudantium voluptatum.
-          </p>
+          <p className={styles.about_book}>{book && book.aboutBook}</p>
           <div className={styles.line}></div>
 
           <div className={styles.quantity_div}>
@@ -69,19 +64,14 @@ const BookDetails = () => {
 
       <div className={styles.bottom_div}>
         <div className={styles.about_book_div}>
-          <h4>O Knjizi: {}</h4>
-          <p>Broj stranica: {}</p>
-          <p>Izdavač: {}</p>
-          <p>ISBN: {}</p>
+          <h4>O Knjizi</h4>
+          <p>Broj stranica: {book && book.numberOfPages}</p>
+          <p>Izdavač: {book && book.publisher}</p>
+          <p>ISBN: {book && book.ISBN}</p>
         </div>
         <div className={styles.about_author_div}>
           <h4>O Piscu</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore et
-            laboriosam consectetur voluptates ut dolorem eaque dolor, amet est
-            accusamus! Magnam veniam magni at quod ab ratione harum adipisci
-            tenetur.
-          </p>
+          <p>{book && book.aboutAuthor}</p>
         </div>
       </div>
     </div>
