@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import styles from "../../styles/BookDetails.module.css";
 import { db } from "../../lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, addDoc } from "firebase/firestore";
 import Image from "next/image";
 
 const BookDetails = () => {
@@ -18,10 +18,19 @@ const BookDetails = () => {
       if (bookSnapshot.exists()) {
         setBook(bookSnapshot.data());
       } else {
-        alert("Book not found!");
+        alert("Knjiga ne postoji!");
       }
     })();
   }, []);
+
+  const requestBook = () => {
+    (async () => {
+      const bookRequestsRef = collection(db, "bookRequests");
+      addDoc(bookRequestsRef, book).catch((error) => {
+        alert("Nemoguce!");
+      });
+    })();
+  };
 
   return (
     <div className={styles.root_div}>
@@ -56,7 +65,7 @@ const BookDetails = () => {
               <p>{book && book.quantity}</p>
             </div>
             <div className={styles.btn_reserve_book_div}>
-              <button>Posudi knjigu</button>
+              <button onClick={requestBook}>Posudi knjigu</button>
             </div>
           </div>
         </div>
