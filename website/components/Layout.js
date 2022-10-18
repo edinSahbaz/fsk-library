@@ -72,6 +72,7 @@ const Layout = ({ children }) => {
     setLoading(false);
   }, [userDB]);
 
+  // expose to the context
   const exposedToContext = { books };
 
   return (
@@ -98,6 +99,7 @@ const Layout = ({ children }) => {
   );
 };
 
+// export useBooks hook
 export const useBooks = () => useContext(Context);
 
 export default Layout;
