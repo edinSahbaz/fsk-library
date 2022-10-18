@@ -25,7 +25,10 @@ const BookDisplay = () => {
     <div className={styles.main}>
       {books &&
         books.map((book) => (
-          <div className={styles.book_card} key={book.id}>
+          <div
+            className={`${styles.book_card} animate__animated animate__fadeIn`}
+            key={book.id}
+          >
             <div className={styles.book_photo}></div>
             <div className={styles.book_details}>
               <div>
