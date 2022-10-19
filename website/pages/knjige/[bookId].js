@@ -5,10 +5,14 @@ import { db } from "../../lib/firebase";
 import { collection, doc, getDoc, addDoc } from "firebase/firestore";
 import Image from "next/image";
 
+import { useUser } from "../../components/Layout";
+
 const BookDetails = () => {
   const router = useRouter();
   const { bookId } = router.query;
   const [book, setBook] = useState(null);
+  const { userDB } = useUser();
+  const userId = userDB.email;
 
   // Get the current book
   useEffect(() => {
@@ -28,7 +32,10 @@ const BookDetails = () => {
   const requestBook = () => {
     (async () => {
       const bookRequestsRef = collection(db, "bookRequests");
-      addDoc(bookRequestsRef, book).catch((error) => {
+
+      const bookRequest = { bookId, userId };
+
+      addDoc(bookRequestsRef, { bookId, userId }).catch((error) => {
         alert("Nemoguce!");
       });
     })();
