@@ -32,9 +32,7 @@ const BookDetails = () => {
   const requestBook = () => {
     (async () => {
       const bookRequestsRef = collection(db, "bookRequests");
-
       const bookRequest = { bookId, userId };
-
       addDoc(bookRequestsRef, { bookId, userId }).catch((error) => {
         alert("Nemoguce!");
       });
