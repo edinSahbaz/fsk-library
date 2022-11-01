@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./../styles/AddBook.module.css";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "./../lib/firebase";
+import toast from "react-hot-toast";
 
 const AddBook = ({ setShowModal }) => {
   const [name, setName] = useState("");
@@ -27,7 +28,15 @@ const AddBook = ({ setShowModal }) => {
       quantity,
     };
 
-    addDoc(booksRef, data).then(alert("Knjiga uspješno dodana."));
+    const loading = addDoc(booksRef, data).then(
+      alert("Knjiga uspješno dodana.")
+    );
+
+    toast.promise(loading, {
+      loading: "Dodavanje knjige...",
+      success: "Knjiga uspješno dodana!",
+      error: "Greška...",
+    });
   };
 
   return (
