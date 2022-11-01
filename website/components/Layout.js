@@ -101,5 +101,6 @@ const Layout = ({ children }) => {
 
 // export useBooks hook
 export const useBooks = () => useContext(Context);
+export const useUser = () => useContext(authContext);
 
 export default Layout;
