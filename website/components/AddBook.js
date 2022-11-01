@@ -28,9 +28,7 @@ const AddBook = ({ setShowModal }) => {
       quantity,
     };
 
-    const loading = addDoc(booksRef, data).then(
-      alert("Knjiga uspješno dodana.")
-    );
+    const loading = addDoc(booksRef, data).then(() => setShowModal(false));
 
     toast.promise(loading, {
       loading: "Dodavanje knjige...",
