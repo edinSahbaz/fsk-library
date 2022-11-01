@@ -217,11 +217,6 @@ const AuthForm = () => {
           </div>
         </div>
       </div>
-
-      <p className={`${styles.copyright} animate__animated animate__slideInUp`}>
-        © {currentYear} Fakultet za saobraćaj i komunikacije Univerziteta u
-        Sarajevu | Sva prava zadržana
-      </p>
     </>
   );
 };

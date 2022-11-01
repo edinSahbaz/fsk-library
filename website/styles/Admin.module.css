@@ -1,0 +1,8 @@
+.container {
+  margin: 0 2em;
+  min-height: 100vh;
+}
+
+.heading {
+  margin-top: 5em;
+}
