@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import Preloader from "./Preloader";
+import { Toaster } from "react-hot-toast";
 
 const Context = createContext();
 
@@ -67,8 +68,6 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     if (userDB === null) return;
-    console.log(userDB);
-    console.log(books);
     setLoading(false);
   }, [userDB]);
 
@@ -86,6 +85,7 @@ const Layout = ({ children }) => {
               ) : (
                 <>
                   <Navbar />
+                  <Toaster position="top-right" />
                   {children}
                   <Footer />
                 </>

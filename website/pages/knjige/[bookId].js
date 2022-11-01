@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import styles from "../../styles/BookDetails.module.css";
 import { db } from "../../lib/firebase";
-import { collection, doc, getDoc, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, addDoc, Timestamp } from "firebase/firestore";
 import Image from "next/image";
 
 import { useUser } from "../../components/Layout";
@@ -32,8 +32,12 @@ const BookDetails = () => {
   const requestBook = () => {
     (async () => {
       const bookRequestsRef = collection(db, "bookRequests");
-      const bookRequest = { bookId, userId };
-      addDoc(bookRequestsRef, { bookId, userId }).catch((error) => {
+
+      addDoc(bookRequestsRef, {
+        bookId,
+        userId,
+        addedTime: Timestamp.now(),
+      }).catch((error) => {
         alert("Nemoguce!");
       });
     })();
