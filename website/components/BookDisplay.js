@@ -1,7 +1,4 @@
 import styles from "../styles/BookDisplay.module.css";
-import { db } from "../lib/firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
-import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -20,8 +17,9 @@ const BookDisplay = () => {
             >
               <div className={styles.book_photo}>
                 <Image
-                  src="/TempBookImage.jpg"
+                  src={book.imgUrl ? book.imgUrl : "/TempBookImage.jpg"}
                   width="250px"
+                  alt="img"
                   height="240px"
                 ></Image>
               </div>
