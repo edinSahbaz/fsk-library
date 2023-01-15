@@ -14,8 +14,34 @@
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 450px) {
+  .contact_page {
+    padding-top: 25%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
+@media only screen and (min-width: 451px) and (max-width: 800px) {
+  .contact_page {
+    padding-top: 15%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 900px) {
   .contact_page {
     padding-top: 13%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
+@media only screen and (min-width: 901px) {
+  .contact_page {
+    padding-top: 6%;
+    margin-left: 0%;
+    margin-right: 0%;
   }
 }

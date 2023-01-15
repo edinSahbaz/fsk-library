@@ -124,6 +124,6 @@
     flex-direction: column;
   }
   .float_child iframe {
-    min-height: 500px;
+    min-height: 400px;
   }
 }
