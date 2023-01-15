@@ -72,6 +72,11 @@ main {
   background: transparent;
   border: 0;
 }
+
+.controlledInput:disabled {
+  color: black;
+}
+
 .inputContainer {
   display: block;
   overflow: hidden;

@@ -14,6 +14,7 @@ const BookDetails = () => {
   const [book, setBook] = useState(null);
   const { userDB } = useUser();
   const userId = userDB.email;
+  const [canEdit, setCanEdit] = useState(false)
 
   // Get the current book
   useEffect(() => {
@@ -31,6 +32,12 @@ const BookDetails = () => {
       unsub();
     }
   }, []);
+
+  useEffect(() => { // Checks if user can edit book
+    if(userId !== 'biblioteka@fsk.unsa.ba') return;
+
+    setCanEdit(false);
+  }, [])
 
   //Send the current book to bookRequests
   const requestBook = () => {
@@ -92,21 +99,21 @@ const BookDetails = () => {
                 <div className={styles.title_div}>
                   <label>Naziv knjige</label>
                   <span className="inputContainer">
-                    <input value={book.name} type='text' className='controlledInput large'/>
+                    <input disabled={!canEdit} value={book.name} type='text' className='controlledInput large'/>
                   </span>
                 </div>
 
                 <div className={styles.author_div}>
                   <label>Pisac</label>
                   <span className="inputContainer">
-                    <input value={book.author} type='text' className='controlledInput normal'/>
+                    <input disabled={!canEdit} value={book.author} type='text' className='controlledInput normal'/>
                   </span>
                 </div>
 
                 <div className={styles.line}></div>
                 <p className={styles.about_book}>
                   <span className="inputContainer">
-                    <input value={book.aboutBook} type='text' className='controlledInput normal'/>
+                    <input disabled={!canEdit} value={book.aboutBook} type='text' className='controlledInput normal'/>
                   </span>
                 </p>
                 
@@ -116,7 +123,7 @@ const BookDetails = () => {
                   <div className={styles.quantity_text}>
                     <label>Kolicina</label>
                     <span className="inputContainer">
-                      <input value={book.quantity} type='number' className='controlledInput normal'/>
+                      <input disabled={!canEdit} value={book.quantity} type='number' className='controlledInput normal'/>
                     </span>
                   </div>
                   <div className={styles.btn_reserve_book_div}>
@@ -131,24 +138,24 @@ const BookDetails = () => {
                 <h4>O Knjizi</h4>
                 <p>Broj stranica: 
                   <span className="inputContainer">
-                    <input value={book.numberOfPages} type='number' className='controlledInput normal'/>
+                    <input disabled={!canEdit} value={book.numberOfPages} type='number' className='controlledInput normal'/>
                   </span>
                 </p>
                 <p>ISBN: 
                   <span className="inputContainer">
-                    <input value={book.ISBN} type='text' className='controlledInput normal'/>
+                    <input disabled={!canEdit} value={book.ISBN} type='text' className='controlledInput normal'/>
                   </span>
                 </p>
                 <p>Izdavač: 
                   <span className="inputContainer">
-                    <input value={book.publisher} type='text' className='controlledInput normal'/>
+                    <input disabled={!canEdit} value={book.publisher} type='text' className='controlledInput normal'/>
                   </span>
                 </p>
               </div>
               <div className={styles.about_author_div}>
                 <h4>O Piscu</h4>
                 <span className="inputContainer">
-                  <input value={book.aboutAuthor} type='text' className='controlledInput normal'/>
+                  <input disabled={!canEdit} value={book.aboutAuthor} type='text' className='controlledInput normal'/>
                 </span>
               </div>
             </div>
