@@ -73,58 +73,89 @@ const BookDetails = () => {
   };
 
   return (
-    <div className={styles.root_div}>
-      <div className={styles.top_div}>
-        <div className={styles.left_div}>
-          <Image
-            className={styles.book_image}
-            src="/TempBookImage.jpg"
-            width="250px"
-            height="240px"
-            objectFit="contain"
-            alt="slika"
-          ></Image>
-        </div>
-        <div className={styles.right_div}>
-          <div className={styles.title_div}>
-            <label>Naziv knjige</label>
-            <h2>{book && book.name}</h2>
-          </div>
+    <>
+      {
+        book ? (
+          <div className={styles.root_div}>
+            <div className={styles.top_div}>
+              <div className={styles.left_div}>
+                <Image
+                  className={styles.book_image}
+                  src="/TempBookImage.jpg"
+                  width="250px"
+                  height="240px"
+                  objectFit="contain"
+                  alt="slika"
+                ></Image>
+              </div>
+              <div className={styles.right_div}>
+                <div className={styles.title_div}>
+                  <label>Naziv knjige</label>
+                  <span className="inputContainer">
+                    <input value={book.name} type='text' className='controlledInput large'/>
+                  </span>
+                </div>
 
-          <div className={styles.author_div}>
-            <label>Pisac</label>
-            <p>{book && book.author}</p>
-          </div>
+                <div className={styles.author_div}>
+                  <label>Pisac</label>
+                  <span className="inputContainer">
+                    <input value={book.author} type='text' className='controlledInput normal'/>
+                  </span>
+                </div>
 
-          <div className={styles.line}></div>
-          <p className={styles.about_book}>{book && book.aboutBook}</p>
-          <div className={styles.line}></div>
+                <div className={styles.line}></div>
+                <p className={styles.about_book}>
+                  <span className="inputContainer">
+                    <input value={book.aboutBook} type='text' className='controlledInput normal'/>
+                  </span>
+                </p>
+                
+                <div className={styles.line}></div>
 
-          <div className={styles.quantity_div}>
-            <div className={styles.quantity_text}>
-              <label>Kolicina</label>
-              <p>{book && book.quantity}</p>
+                <div className={styles.quantity_div}>
+                  <div className={styles.quantity_text}>
+                    <label>Kolicina</label>
+                    <span className="inputContainer">
+                      <input value={book.quantity} type='number' className='controlledInput normal'/>
+                    </span>
+                  </div>
+                  <div className={styles.btn_reserve_book_div}>
+                    <button onClick={requestBook}>Posudi knjigu</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className={styles.btn_reserve_book_div}>
-              <button onClick={requestBook}>Posudi knjigu</button>
+
+            <div className={styles.bottom_div}>
+              <div className={styles.about_book_div}>
+                <h4>O Knjizi</h4>
+                <p>Broj stranica: 
+                  <span className="inputContainer">
+                    <input value={book.numberOfPages} type='number' className='controlledInput normal'/>
+                  </span>
+                </p>
+                <p>ISBN: 
+                  <span className="inputContainer">
+                    <input value={book.ISBN} type='text' className='controlledInput normal'/>
+                  </span>
+                </p>
+                <p>Izdavač: 
+                  <span className="inputContainer">
+                    <input value={book.publisher} type='text' className='controlledInput normal'/>
+                  </span>
+                </p>
+              </div>
+              <div className={styles.about_author_div}>
+                <h4>O Piscu</h4>
+                <span className="inputContainer">
+                  <input value={book.aboutAuthor} type='text' className='controlledInput normal'/>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className={styles.bottom_div}>
-        <div className={styles.about_book_div}>
-          <h4>O Knjizi</h4>
-          <p>Broj stranica: {book && book.numberOfPages}</p>
-          <p>Izdavač: {book && book.publisher}</p>
-          <p>ISBN: {book && book.ISBN}</p>
-        </div>
-        <div className={styles.about_author_div}>
-          <h4>O Piscu</h4>
-          <p>{book && book.aboutAuthor}</p>
-        </div>
-      </div>
-    </div>
+        ) : null
+      }
+    </>
   );
 };
 
