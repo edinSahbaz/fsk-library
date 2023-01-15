@@ -14,6 +14,18 @@ const BookDetails = () => {
   const [book, setBook] = useState(null);
   const { userDB } = useUser();
   const userId = userDB.email;
+  const [canEdit, setCanEdit] = useState(false);
+
+  // Book data
+  const [name, setName] = useState(null);
+  const [quantity, setQuantity] = useState(null);
+  const [image, setImage] = useState(null);
+  const [author, setAuthor] = useState(null);
+  const [aboutBook, setAboutBook] = useState(null);
+  const [ISBN, setISBN] = useState(null);
+  const [numberOfPages, setNumberOfPages] = useState(null);
+  const [publisher, setPublisher] = useState(null);
+  const [aboutAuthor, setAboutAuthor] = useState(null);
 
   // Get the current book
   useEffect(() => {
@@ -22,6 +34,18 @@ const BookDetails = () => {
     const unsub = onSnapshot(bookRef, bookSnapshot => {
       if (bookSnapshot.exists()) {
         setBook(bookSnapshot.data());
+        const data = bookSnapshot.data();
+
+        if (data.name) setName(data.name);
+        if (data.quantity) setQuantity(data.quantity);
+        if (data.image) setImage(data.image);
+        if (data.author) setAuthor(data.author);
+        if (data.aboutBook) setAboutBook(data.aboutBook);
+        if (data.ISBN) setISBN(data.ISBN);
+        if (data.numberOfPages) setNumberOfPages(data.numberOfPages);
+        if (data.publisher) setPublisher(data.publisher);
+        if (data.aboutAuthor) setAboutAuthor(data.aboutAuthor);
+
       } else {
         alert("Knjiga ne postoji!");
       }
@@ -31,6 +55,12 @@ const BookDetails = () => {
       unsub();
     }
   }, []);
+
+  useEffect(() => { // Checks if user can edit book
+    if(userId !== 'biblioteka@fsk.unsa.ba') return;
+
+    setCanEdit(true);
+  }, [])
 
   //Send the current book to bookRequests
   const requestBook = () => {
@@ -72,59 +102,141 @@ const BookDetails = () => {
     })();
   };
 
+  const updateBook = () => {
+    const bookRef = doc(db, 'books', bookId);
+    const loading = updateDoc(bookRef, {
+      name,
+      author,
+      publisher,
+      quantity,
+      image,
+      aboutAuthor,
+      ISBN,
+      numberOfPages,
+      aboutBook
+    });
+
+    toast.promise(loading, {
+      loading: "Spremanje promjena...",
+      success: "Spremanje promjena...",
+      error: "Spremanje promjena..."
+    })
+  }
+
+  useEffect(() => {
+    if(!canEdit) return;
+    
+    const temp = setTimeout(updateBook, 500);
+
+    return () => {
+      clearTimeout(temp);
+    }
+  }, [name, publisher, quantity, image, author, aboutAuthor, aboutBook, ISBN, numberOfPages])
+
   return (
-    <div className={styles.root_div}>
-      <div className={styles.top_div}>
-        <div className={styles.left_div}>
-          <Image
-            className={styles.book_image}
-            src="/TempBookImage.jpg"
-            width="250px"
-            height="240px"
-            objectFit="contain"
-            alt="slika"
-          ></Image>
-        </div>
-        <div className={styles.right_div}>
-          <div className={styles.title_div}>
-            <label>Naziv knjige</label>
-            <h2>{book && book.name}</h2>
-          </div>
+    <>
+      {
+        book ? (
+          <div className={styles.root_div}>
+            <div className={styles.top_div}>
+              <div className={styles.left_div}>
+                <Image
+                  className={styles.book_image}
+                  src={book.image ? book.image : '/TempBookImage.jpg'}
+                  width="250px"
+                  height="240px"
+                  objectFit="contain"
+                  alt="slika"
+                ></Image>
+              </div>
+              <div className={styles.right_div}>
+                <div className={styles.title_div}>
+                  <label>Naziv knjige</label>
+                  <span className="inputContainer">
+                    <input 
+                    disabled={!canEdit} 
+                    value={name} 
+                    onChange={e => setName(e.target.value)} 
+                    type='text' 
+                    className='controlledInput large'/>
+                  </span>
+                </div>
 
-          <div className={styles.author_div}>
-            <label>Pisac</label>
-            <p>{book && book.author}</p>
-          </div>
+                <div className={styles.author_div}>
+                  <label>Pisac</label>
+                  <span className="inputContainer">
+                    <input 
+                    disabled={!canEdit} 
+                    value={author}
+                    onChange={e => setAuthor(e.target.value)} 
+                    type='text' 
+                    className='controlledInput normal'/>
+                  </span>
+                </div>
 
-          <div className={styles.line}></div>
-          <p className={styles.about_book}>{book && book.aboutBook}</p>
-          <div className={styles.line}></div>
+                <div className={styles.line}></div>
+                <p className={styles.about_book}>
+                  <span className="inputContainer">
+                    <input 
+                    disabled={!canEdit} 
+                    value={aboutBook}
+                    onChange={e => setAboutBook(e.target.value)} 
+                    type='text' 
+                    className='controlledInput normal'/>
+                  </span>
+                </p>
+                
+                <div className={styles.line}></div>
 
-          <div className={styles.quantity_div}>
-            <div className={styles.quantity_text}>
-              <label>Kolicina</label>
-              <p>{book && book.quantity}</p>
+                <div className={styles.quantity_div}>
+                  <div className={styles.quantity_text}>
+                    <label>Kolicina</label>
+                    <span className="inputContainer">
+                      <input 
+                      disabled={!canEdit} 
+                      value={quantity} 
+                      onChange={e => setQuantity(e.target.value)} 
+                      type='number' 
+                      className='controlledInput normal'/>
+                    </span>
+                  </div>
+                  <div className={styles.btn_reserve_book_div}>
+                    <button onClick={requestBook}>Posudi knjigu</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className={styles.btn_reserve_book_div}>
-              <button onClick={requestBook}>Posudi knjigu</button>
+
+            <div className={styles.bottom_div}>
+              <div className={styles.about_book_div}>
+                <h4>O Knjizi</h4>
+                <p>Broj stranica: 
+                  <span className="inputContainer">
+                    <input disabled={!canEdit} value={book.numberOfPages} type='number' className='controlledInput normal'/>
+                  </span>
+                </p>
+                <p>ISBN: 
+                  <span className="inputContainer">
+                    <input disabled={!canEdit} value={book.ISBN} type='text' className='controlledInput normal'/>
+                  </span>
+                </p>
+                <p>Izdavač: 
+                  <span className="inputContainer">
+                    <input disabled={!canEdit} value={book.publisher} type='text' className='controlledInput normal'/>
+                  </span>
+                </p>
+              </div>
+              <div className={styles.about_author_div}>
+                <h4>O Piscu</h4>
+                <span className="inputContainer">
+                  <input disabled={!canEdit} value={book.aboutAuthor} type='text' className='controlledInput normal'/>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className={styles.bottom_div}>
-        <div className={styles.about_book_div}>
-          <h4>O Knjizi</h4>
-          <p>Broj stranica: {book && book.numberOfPages}</p>
-          <p>Izdavač: {book && book.publisher}</p>
-          <p>ISBN: {book && book.ISBN}</p>
-        </div>
-        <div className={styles.about_author_div}>
-          <h4>O Piscu</h4>
-          <p>{book && book.aboutAuthor}</p>
-        </div>
-      </div>
-    </div>
+        ) : null
+      }
+    </>
   );
 };
 
