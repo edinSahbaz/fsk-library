@@ -146,14 +146,14 @@ const BookDetails = () => {
     }
   }, [name, imageName, publisher, quantity, author, aboutAuthor, aboutBook, ISBN, numberOfPages])
 
-  useEffect(() => {
+  useEffect(() => { // Upload img
     if(!image) return;
 
     const bookImgRef = ref(storage, `books/${bookId}/${image.name}`)
     uploadBytes(bookImgRef, image).then(() => setImageName(image.name));
   }, [image])
 
-  useEffect(() => {
+  useEffect(() => { // Get img link
     if(!imageName) return;
 
     const bookImgRef = ref(storage, `books/${bookId}/${imageName}`)

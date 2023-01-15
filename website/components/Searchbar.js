@@ -17,13 +17,13 @@ const Searchbar = () => {
 
           <div className={styles.radio_toolbar}>
             <input type="radio" id="radio1" name="radios" defaultChecked />
-            <label for="radio1">Sva polja</label>
+            <label htmlFor="radio1">Sva polja</label>
 
             <input type="radio" id="radio2" name="radios" />
-            <label for="radio2">Pisci</label>
+            <label htmlFor="radio2">Pisci</label>
 
             <input type="radio" id="radio3" name="radios" />
-            <label for="radio3">Naslovi</label>
+            <label htmlFor="radio3">Naslovi</label>
           </div>
         </div>
         <button className={styles.btn_search}>
