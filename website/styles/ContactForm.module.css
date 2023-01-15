@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  flex-direction: row;
   margin-top: 20px;
 }
 
@@ -16,54 +17,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-/* full name div */
-.contact_input_fullname {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-}
-
-.contact_input_fullname p {
-  padding: 0;
-  margin: 0;
-  margin-bottom: 10px;
-  font-size: 20px;
-  margin-left: 10px;
-}
-
-/* full name inputs div */
-.contact_input_fullname_input {
-  display: flex;
-  flex: 1;
-  width: 100%;
-  padding: 10px;
-}
-
-.contact_input_fullname_input div {
-  flex: 1;
-}
-
-.name_input {
-  margin-right: 15px;
-}
-
-.contact_input_fullname_input input {
-  width: 100%;
-  height: 35px;
-  outline: none;
-  margin-bottom: 5px;
-  border: 1px solid rgb(201, 201, 201);
-  border-radius: 4px;
-  padding-left: 10px;
-}
-
-.contact_input_fullname_input label {
-  margin-left: 5px;
-  user-select: none;
-  color: rgb(87, 100, 126);
-  font-size: 14px;
 }
 
 /* map div */
@@ -89,7 +42,6 @@
 .contact_input_email_subject p {
   padding: 0;
   margin: 0;
-  margin-bottom: 10px;
   font-size: 20px;
   margin-left: 10px;
 }
@@ -99,7 +51,8 @@
   display: flex;
   flex: 1;
   width: 100%;
-  padding: 10px;
+
+  padding: 0 10px 10px 10px;
 }
 
 .contact_input_email_subject_input div {
@@ -136,7 +89,7 @@
 .contact_text p {
   padding: 0;
   margin: 0;
-  margin-bottom: 10px;
+
   font-size: 20px;
 }
 
@@ -172,4 +125,10 @@
 
 .btn_send:active {
   opacity: 0.7;
+}
+
+@media only screen and (max-width: 900px) {
+  .contact_main {
+    flex-direction: column;
+  }
 }
