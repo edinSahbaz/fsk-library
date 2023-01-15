@@ -1,7 +1,7 @@
 /* main div */
 .main {
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 7%;
+  margin-right: 7%;
   display: grid;
   flex-direction: row;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -11,7 +11,7 @@
 }
 /* card div */
 .book_card {
-  height: 425px;
+  height: 430px;
   border: 1px solid rgb(201, 201, 201);
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
@@ -25,7 +25,10 @@
 .book_photo {
   height: 240px;
   margin: 5px;
-  background-color: lightblue;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: white;
 }
 
 /* p tag for card */
@@ -47,4 +50,28 @@
   margin-left: 10px;
   color: rgb(87, 100, 126);
   font-size: 14px;
+}
+
+@media only screen and (max-width: 1160px) {
+  .main {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .main {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
 }

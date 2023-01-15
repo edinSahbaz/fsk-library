@@ -11,26 +11,26 @@ const BookDisplay = () => {
   const [bookImgs, setBookImgs] = useState({});
 
   useEffect(() => {
-    if(!books) return;
+    if (!books) return;
 
     let temp = {};
     books.forEach(async (book) => {
-      if(book.image) {
+      if (book.image) {
         const imgName = book.image;
-        const bookImgRef = ref(storage, `books/${book.id}/${imgName}`)
+        const bookImgRef = ref(storage, `books/${book.id}/${imgName}`);
 
-        const url = await getDownloadURL(bookImgRef)
-        setBookImgs(prev => {return {...prev, [book.id]: url}})
+        const url = await getDownloadURL(bookImgRef);
+        setBookImgs((prev) => {
+          return { ...prev, [book.id]: url };
+        });
       }
     });
 
     setBookImgs(temp);
-    console.log(temp)
+    console.log(temp);
 
-    return () => {
-    }
-  }, [books])
-  
+    return () => {};
+  }, [books]);
 
   return (
     <div className={styles.main}>
@@ -42,10 +42,13 @@ const BookDisplay = () => {
             >
               <div className={styles.book_photo}>
                 <Image
-                  src={bookImgs[book.id] ? bookImgs[book.id] : "/TempBookImage.jpg"}
+                  src={
+                    bookImgs[book.id] ? bookImgs[book.id] : "/TempBookImage.jpg"
+                  }
                   width="250px"
                   alt="img"
                   height="240px"
+                  objectFit="contain"
                 ></Image>
               </div>
               <div className={styles.book_details}>

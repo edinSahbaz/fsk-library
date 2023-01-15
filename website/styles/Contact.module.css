@@ -1,11 +1,12 @@
 .contact_page {
-  margin-left: 50px;
+  margin-left: 7%;
+  margin-right: 7%;
   margin-bottom: 40px;
+  padding-top: 5%;
 }
 
 .contactus_text {
   border-bottom: 1px solid rgb(201, 201, 201);
-  margin-right: 40px;
 }
 
 .contactus_text h1 {
@@ -13,8 +14,34 @@
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 450px) {
   .contact_page {
-    padding-top: 30px;
+    padding-top: 25%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
+@media only screen and (min-width: 451px) and (max-width: 800px) {
+  .contact_page {
+    padding-top: 15%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 900px) {
+  .contact_page {
+    padding-top: 13%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
+@media only screen and (min-width: 901px) {
+  .contact_page {
+    padding-top: 6%;
+    margin-left: 0%;
+    margin-right: 0%;
   }
 }

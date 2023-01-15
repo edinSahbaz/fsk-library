@@ -58,7 +58,6 @@
   display: flex;
   align-items: center;
   justify-content: end;
-  flex-shrink: 0;
 }
 
 .btn_login {
@@ -89,6 +88,8 @@
   cursor: pointer;
   width: 140px;
   font-size: 14px;
+
+  transition: all 0.7s;
 }
 
 .btn:hover {
@@ -102,4 +103,78 @@
 
 .headline {
   font-weight: 600;
+}
+
+@media only screen and (max-width: 380px) {
+  .headline {
+    display: none;
+  }
+  .btn {
+    width: fit-content;
+    padding: 5px;
+  }
+  .middle_part {
+    gap: 1em;
+  }
+  .logo {
+    margin: 0;
+  }
+  .nav_bar {
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 60px;
+  }
+  .left_part {
+    width: 250px;
+  }
+}
+
+@media only screen and (min-width: 381px) and (max-width: 600px) {
+  .headline {
+    display: none;
+  }
+  .btn {
+    width: fit-content;
+    padding: 10px;
+  }
+  .middle_part {
+    gap: 1em;
+  }
+  .logo {
+    margin: 0;
+  }
+  .nav_bar {
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 60px;
+  }
+  .left_part {
+    width: 250px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1000px) {
+  .headline {
+    display: none;
+  }
+  .btn {
+    /* width: fit-content; */
+  }
+  .middle_part {
+    gap: 1em;
+  }
+  .logo {
+    margin: 0;
+  }
+  .nav_bar {
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 60px;
+  }
+  .left_part {
+    width: 360px;
+  }
 }

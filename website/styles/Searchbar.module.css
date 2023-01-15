@@ -1,7 +1,8 @@
 .searchbar_element {
   margin-bottom: 50px;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 7%;
+  margin-right: 7%;
+  padding-top: 50px;
 }
 
 .main {
@@ -73,6 +74,7 @@
 
 .dropdown_main {
   margin-top: 30px;
+  display: flex;
 }
 
 .dropdown_main select {
@@ -112,4 +114,18 @@
 
 .btn_search:active {
   opacity: 0.7;
+}
+
+@media only screen and (max-width: 600px) {
+  .radio_toolbar {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .headline {
+    font-size: 38px;
+    display: flex;
+    justify-content: center;
+  }
 }
