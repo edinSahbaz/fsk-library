@@ -1,4 +1,4 @@
-import { deleteDoc, doc, Timestamp, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, Timestamp, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { db } from "../lib/firebase";
@@ -6,8 +6,22 @@ import { useBooks } from "./Layout";
 
 const Lease = ({ bookId, userId, id }) => {
   const { books } = useBooks();
+  const [user, setUser] = useState("");
   const [bookName, setBookName] = useState("");
   const [bookQuantity, setBookQuantity] = useState(0);
+
+  const getUserName = async () => {
+    const ref = doc(db, 'users', userId);
+    const res = await getDoc(ref);
+
+    if(!res.exists()) return;
+    const {name, surname} = res.data();
+    if(name && surname) setUser(`${name} ${surname}`);
+  }
+
+  useEffect(() => {
+    getUserName();
+  }, [])
 
   useEffect(() => {
     const book = books.filter((book) => book.id == bookId)[0];
@@ -39,7 +53,7 @@ const Lease = ({ bookId, userId, id }) => {
   return (
     <div>
       <label>
-        {userId} - {bookName}
+        {user} ({userId}) - {bookName}
         <button onClick={confirmLease}>Vraćeno</button>
       </label>
     </div>
