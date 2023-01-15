@@ -48,11 +48,9 @@ const AuthForm = () => {
 
         const userDoc = doc(db, "users", email);
         setDoc(userDoc, userData, email);
-        sendEmailVerification(res.user)
+        sendEmailVerification(res.user);
       })
       .catch((err) => setError(err));
-
-    
   };
 
   const login = () => {

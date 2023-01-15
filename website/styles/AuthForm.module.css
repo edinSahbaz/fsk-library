@@ -1,13 +1,15 @@
 .main {
   display: flex;
   background: white;
+  justify-content: space-evenly;
 }
 
 .container {
   margin: 0;
-  width: 50%;
   height: 100vh;
   display: flex;
+  flex: 50%;
+  justify-content: center;
   flex-direction: column;
   padding: 20px 120px;
 }
@@ -119,4 +121,35 @@
   font-size: 0.8em;
   margin-top: -1em;
   margin-left: 12px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .main {
+    flex-direction: column-reverse;
+  }
+  .container {
+    padding: 20px 50px;
+  }
+  .authForm {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .title {
+    font-size: 2rem;
+    margin-top: 0;
+  }
+  .imageContainer * {
+    width: 150px !important;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .imageContainer {
+    display: none;
+  }
+  .container {
+    padding: 1px 50px 10px 50px;
+  }
 }
