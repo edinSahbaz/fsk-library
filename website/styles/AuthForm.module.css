@@ -2,6 +2,8 @@
   display: flex;
   background: white;
   justify-content: space-evenly;
+  height: 100vh;
+  flex-shrink: 0;
 }
 
 .container {
@@ -123,7 +125,7 @@
   margin-left: 12px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (min-width: 601px) and (max-width: 1000px) {
   .main {
     flex-direction: column-reverse;
   }
@@ -133,9 +135,27 @@
   .authForm {
     width: 100%;
   }
+  .imageContainer * {
+    width: 250px !important;
+  }
+  .right_container {
+    padding: 0;
+  }
+  .title {
+    margin-top: 0;
+  }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (min-width: 381px) and (max-width: 600px) {
+  .main {
+    flex-direction: column-reverse;
+  }
+  .container {
+    padding: 20px 50px;
+  }
+  .authForm {
+    width: 100%;
+  }
   .title {
     font-size: 2rem;
     margin-top: 0;
@@ -143,11 +163,31 @@
   .imageContainer * {
     width: 150px !important;
   }
+  .right_container {
+    flex-basis: 0px;
+    /* height: 100px !important; */
+  }
+  .right_container {
+  }
 }
 
-@media only screen and (max-width: 350px) {
-  .imageContainer {
+@media only screen and (max-width: 380px) {
+  .main {
+    flex-direction: column-reverse;
+  }
+  .container {
+    padding: 20px 50px;
+  }
+  .authForm {
+    width: 100%;
+  }
+  .title {
+    font-size: 2rem;
+    margin-top: 0;
+  }
+  .right_container {
     display: none;
+    padding-top: 0;
   }
   .container {
     padding: 1px 50px 10px 50px;

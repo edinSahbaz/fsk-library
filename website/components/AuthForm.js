@@ -85,7 +85,7 @@ const AuthForm = () => {
   return (
     <>
       <div className={`${styles.main} animate__animated animate__slideInDown`}>
-        <div className={`${styles.container}`}>
+        <div className={`${styles.container} ${styles.left_container}`}>
           <h1 className={`${styles.title}`}>FSK - eBiblioteka</h1>
           <div className={styles.intro}>
             <h2 className={styles.subtitle}>Dobrodošli</h2>
@@ -207,7 +207,7 @@ const AuthForm = () => {
           </form>
         </div>
 
-        <div className={`${styles.container}`}>
+        <div className={`${styles.container} ${styles.right_container}`}>
           <div className={styles.imageContainer}>
             <Image
               className="animate__animated animate__pulse animate__infinite animate__slower"
