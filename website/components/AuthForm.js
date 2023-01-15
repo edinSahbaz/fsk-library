@@ -43,13 +43,16 @@ const AuthForm = () => {
     setError("");
 
     createUserWithEmailAndPassword(auth, email, passwrod)
-      .then((res) => sendEmailVerification(res.user))
+      .then((res) => {
+        const userData = { name, surname, index };
+
+        const userDoc = doc(db, "users", email);
+        setDoc(userDoc, userData, email);
+        sendEmailVerification(res.user)
+      })
       .catch((err) => setError(err));
 
-    const userData = { name, surname, index };
-
-    const userDoc = doc(db, "users", email);
-    setDoc(userDoc, userData);
+    
   };
 
   const login = () => {
