@@ -15,20 +15,20 @@ const Searchbar = () => {
             placeholder="Pretraži biblioteku..."
           ></input>
 
-          <div class={styles.radio_toolbar}>
+          <div className={styles.radio_toolbar}>
             <input type="radio" id="radio1" name="radios" defaultChecked />
-            <label for="radio1">Sva polja</label>
+            <label htmlFor="radio1">Sva polja</label>
 
             <input type="radio" id="radio2" name="radios" />
-            <label for="radio2">Pisci</label>
+            <label htmlFor="radio2">Pisci</label>
 
             <input type="radio" id="radio3" name="radios" />
-            <label for="radio3">Naslovi</label>
+            <label htmlFor="radio3">Naslovi</label>
           </div>
         </div>
-        <button class={styles.btn_search}>
+        <button className={styles.btn_search}>
           <Image
-            class={styles.search_icon}
+            className={styles.search_icon}
             alt="search"
             width="30px"
             height="30px"
@@ -36,7 +36,7 @@ const Searchbar = () => {
           />
         </button>
       </div>
-      <div class={styles.dropdown_main}>
+      <div className={styles.dropdown_main}>
         <select name="authors">
           <option value="Pisac">Pisac</option>
           <option value="PisacX">PisacX</option>

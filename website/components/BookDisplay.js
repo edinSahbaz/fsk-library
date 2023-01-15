@@ -1,14 +1,36 @@
 import styles from "../styles/BookDisplay.module.css";
-import { db } from "../lib/firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
-import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 import { useBooks } from "./Layout";
+import { useEffect, useState } from "react";
+import { storage } from "../lib/firebase";
+import { getDownloadURL, ref } from "firebase/storage";
 
 const BookDisplay = () => {
   const { books } = useBooks();
+  const [bookImgs, setBookImgs] = useState({});
+
+  useEffect(() => {
+    if(!books) return;
+
+    let temp = {};
+    books.forEach(async (book) => {
+      if(book.image) {
+        const imgName = book.image;
+        const bookImgRef = ref(storage, `books/${book.id}/${imgName}`)
+
+        const url = await getDownloadURL(bookImgRef)
+        setBookImgs(prev => {return {...prev, [book.id]: url}})
+      }
+    });
+
+    setBookImgs(temp);
+    console.log(temp)
+
+    return () => {
+    }
+  }, [books])
+  
 
   return (
     <div className={styles.main}>
@@ -20,8 +42,9 @@ const BookDisplay = () => {
             >
               <div className={styles.book_photo}>
                 <Image
-                  src="/TempBookImage.jpg"
+                  src={bookImgs[book.id] ? bookImgs[book.id] : "/TempBookImage.jpg"}
                   width="250px"
+                  alt="img"
                   height="240px"
                 ></Image>
               </div>

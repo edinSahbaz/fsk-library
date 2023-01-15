@@ -27,7 +27,7 @@ const Lease = ({ bookId, userId, id }) => {
     const book = books.filter((book) => book.id == bookId)[0];
     setBookName(book.name);
     setBookQuantity(book.quantity);
-  }, []);
+  }, [books]);
 
   const confirmLease = () => {
     const ordersRef = doc(db, "leasedBooks", id);

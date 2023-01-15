@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, cloneElement } from "react";
 import styles from "../../styles/BookDetails.module.css";
-import { db } from "../../lib/firebase";
+import { db, storage } from "../../lib/firebase";
 import { collection, doc, getDoc, addDoc, Timestamp, updateDoc, query, where, getDocs, onSnapshot } from "firebase/firestore";
 import Image from "next/image";
 
 import { useUser } from "../../components/Layout";
 import { toast } from "react-hot-toast";
+import ImageModal from "../../components/ImageModal";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const BookDetails = () => {
   const router = useRouter();
@@ -15,17 +17,22 @@ const BookDetails = () => {
   const { userDB } = useUser();
   const userId = userDB.email;
   const [canEdit, setCanEdit] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [showImgModal, setShowImgModal] = useState(false);
 
   // Book data
   const [name, setName] = useState(null);
   const [quantity, setQuantity] = useState(null);
-  const [image, setImage] = useState(null);
   const [author, setAuthor] = useState(null);
   const [aboutBook, setAboutBook] = useState(null);
   const [ISBN, setISBN] = useState(null);
   const [numberOfPages, setNumberOfPages] = useState(null);
   const [publisher, setPublisher] = useState(null);
   const [aboutAuthor, setAboutAuthor] = useState(null);
+
+  const [image, setImage] = useState(null);
+  const [imageName, setImageName] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   // Get the current book
   useEffect(() => {
@@ -38,7 +45,7 @@ const BookDetails = () => {
 
         if (data.name) setName(data.name);
         if (data.quantity) setQuantity(data.quantity);
-        if (data.image) setImage(data.image);
+        if (data.image) setImageName(data.image);
         if (data.author) setAuthor(data.author);
         if (data.aboutBook) setAboutBook(data.aboutBook);
         if (data.ISBN) setISBN(data.ISBN);
@@ -108,13 +115,15 @@ const BookDetails = () => {
       name,
       author,
       publisher,
-      quantity,
-      image,
+      quantity: Number(quantity),
+      image: imageName,
       aboutAuthor,
       ISBN,
-      numberOfPages,
+      numberOfPages: Number(numberOfPages),
       aboutBook
     });
+
+    if(image)
 
     toast.promise(loading, {
       loading: "Spremanje promjena...",
@@ -125,28 +134,52 @@ const BookDetails = () => {
 
   useEffect(() => {
     if(!canEdit) return;
+    if(firstLoad) {
+      setFirstLoad(false);
+      return;
+    }
     
     const temp = setTimeout(updateBook, 500);
 
     return () => {
       clearTimeout(temp);
     }
-  }, [name, publisher, quantity, image, author, aboutAuthor, aboutBook, ISBN, numberOfPages])
+  }, [name, imageName, publisher, quantity, author, aboutAuthor, aboutBook, ISBN, numberOfPages])
+
+  useEffect(() => { // Upload img
+    if(!image) return;
+
+    const bookImgRef = ref(storage, `books/${bookId}/${image.name}`)
+    uploadBytes(bookImgRef, image).then(() => setImageName(image.name));
+  }, [image])
+
+  useEffect(() => { // Get img link
+    if(!imageName) return;
+
+    const bookImgRef = ref(storage, `books/${bookId}/${imageName}`)
+    getDownloadURL(bookImgRef).then(url => setImageUrl(url));
+  }, [imageName])
+
 
   return (
     <>
       {
         book ? (
           <div className={styles.root_div}>
+            {
+              showImgModal && <ImageModal image={image} setImage={setImage} setShowImgModal={setShowImgModal}/>
+            }
+
             <div className={styles.top_div}>
               <div className={styles.left_div}>
                 <Image
                   className={styles.book_image}
-                  src={book.image ? book.image : '/TempBookImage.jpg'}
+                  src={imageUrl ? imageUrl : '/TempBookImage.jpg'}
                   width="250px"
                   height="240px"
                   objectFit="contain"
                   alt="slika"
+                  onClick={() => setShowImgModal(true)}
                 ></Image>
               </div>
               <div className={styles.right_div}>
@@ -212,24 +245,42 @@ const BookDetails = () => {
                 <h4>O Knjizi</h4>
                 <p>Broj stranica: 
                   <span className="inputContainer">
-                    <input disabled={!canEdit} value={book.numberOfPages} type='number' className='controlledInput normal'/>
+                    <input disabled={!canEdit} 
+                    value={numberOfPages} 
+                    type='number' 
+                    onChange={e => setNumberOfPages(e.target.value)} 
+                    className='controlledInput normal'/>
                   </span>
                 </p>
                 <p>ISBN: 
                   <span className="inputContainer">
-                    <input disabled={!canEdit} value={book.ISBN} type='text' className='controlledInput normal'/>
+                    <input 
+                    disabled={!canEdit} 
+                    value={ISBN} 
+                    type='text' 
+                    onChange={e => setISBN(e.target.value)} 
+                    className='controlledInput normal'/>
                   </span>
                 </p>
                 <p>Izdavač: 
                   <span className="inputContainer">
-                    <input disabled={!canEdit} value={book.publisher} type='text' className='controlledInput normal'/>
+                    <input 
+                    disabled={!canEdit} 
+                    value={publisher} 
+                    onChange={e => setPublisher(e.target.value)} 
+                    type='text' 
+                    className='controlledInput normal'/>
                   </span>
                 </p>
               </div>
               <div className={styles.about_author_div}>
                 <h4>O Piscu</h4>
                 <span className="inputContainer">
-                  <input disabled={!canEdit} value={book.aboutAuthor} type='text' className='controlledInput normal'/>
+                  <input disabled={!canEdit} 
+                    value={aboutAuthor} 
+                    type='text' 
+                    onChange={e => setAboutAuthor(e.target.value)} 
+                    className='controlledInput normal'/>
                 </span>
               </div>
             </div>

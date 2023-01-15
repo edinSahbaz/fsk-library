@@ -5,15 +5,7 @@ import { authContext } from "./../lib/context/AuthContext";
 import { useState, useEffect, useContext, createContext } from "react";
 import { onAuthStateChanged, sendEmailVerification } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
-import {
-  doc,
-  getDoc,
-  collection,
-  getDocs,
-  limit,
-  query,
-  onSnapshot,
-} from "firebase/firestore";
+import { doc, getDoc, collection, limit, query, onSnapshot } from "firebase/firestore";
 import Preloader from "./Preloader";
 import { toast, Toaster } from "react-hot-toast";
 
