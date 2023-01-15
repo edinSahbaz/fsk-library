@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
 import Image from "next/image";
@@ -42,7 +43,7 @@ const AuthForm = () => {
     setError("");
 
     createUserWithEmailAndPassword(auth, email, passwrod)
-      .then((res) => console.log(res.user))
+      .then((res) => sendEmailVerification(res.user))
       .catch((err) => setError(err));
 
     const userData = { name, surname, index };

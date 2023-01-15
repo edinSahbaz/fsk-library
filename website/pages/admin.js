@@ -137,7 +137,7 @@ const Admin = () => {
         </div>
       </div>) : (
         <div className="unauthorized">
-          <p>Nedozvoljen pristup!</p>
+          <h2>Nedozvoljen pristup!</h2>
         </div>
       )
     }
