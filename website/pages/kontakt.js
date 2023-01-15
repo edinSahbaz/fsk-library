@@ -8,7 +8,6 @@ export default function Contact() {
         <div className={styles.contactus_text}>
           <h1>Kontaktirajte nas</h1>
         </div>
-
         <ContactForm />
       </main>
     </div>

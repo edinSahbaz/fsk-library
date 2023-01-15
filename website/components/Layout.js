@@ -55,23 +55,23 @@ const Layout = ({ children }) => {
   // Get the collection of books from firebase
   useEffect(() => {
     const booksCollRef = collection(db, "books");
-    const q = query(booksCollRef, limit(10))
+    const q = query(booksCollRef, limit(20));
 
-    let temp = []
-    const unsub = onSnapshot(q, qSnap => {
-      qSnap.forEach(book => {
+    let temp = [];
+    const unsub = onSnapshot(q, (qSnap) => {
+      qSnap.forEach((book) => {
         const data = book.data();
         data.id = book.id;
 
         temp.push(data);
-      })
-    })
+      });
+    });
 
     setBooks(temp);
 
     return () => {
       unsub();
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -80,11 +80,11 @@ const Layout = ({ children }) => {
   }, [userDB]);
 
   const sendReq = () => {
-    if(!user) return;
+    if (!user) return;
 
     toast.success("Zahtjev poslan!");
     sendEmailVerification(user);
-  }
+  };
 
   // expose to the context
   const exposedToContext = { books };
@@ -99,26 +99,30 @@ const Layout = ({ children }) => {
                 <AuthForm />
               ) : (
                 <>
-                  {
-                    user.emailVerified ? (
-                      <>
-                        <Navbar />
-                        <Toaster position="top-right" />
-                        {children}
-                        <Footer />
-                      </>
-                    ) : (
-                      <>
-                        <Navbar />
-                        <Toaster position="top-right" />
-                        <div className="unauthorized">
-                          <h2>Potvrdite svoju email adresu!</h2>
-                          <p>Ukoliko ne vidite email za potvrdu adrese, provjerite spam ili <span onClick={sendReq} className="linkAuth">pošaljite zahtjev ponovo.</span></p>
-                        </div>
-                        <Footer />
-                      </>
-                    )
-                  }
+                  {user.emailVerified ? (
+                    <>
+                      <Navbar />
+                      <Toaster position="top-right" />
+                      {children}
+                      <Footer />
+                    </>
+                  ) : (
+                    <>
+                      <Navbar />
+                      <Toaster position="top-right" />
+                      <div className="unauthorized">
+                        <h2>Potvrdite svoju email adresu!</h2>
+                        <p>
+                          Ukoliko ne vidite email za potvrdu adrese, provjerite
+                          spam ili{" "}
+                          <span onClick={sendReq} className="linkAuth">
+                            pošaljite zahtjev ponovo.
+                          </span>
+                        </p>
+                      </div>
+                      <Footer />
+                    </>
+                  )}
                 </>
               )}
             </>

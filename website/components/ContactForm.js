@@ -4,34 +4,13 @@ const ContactForm = () => {
   return (
     <div className={styles.contact_main}>
       <form className={styles.contact_form}>
-        <div className={styles.contact_input_fullname}>
-          <div>
-            <p>Ime i prezime</p>
-          </div>
-          <div className={styles.contact_input_fullname_input}>
-            <div className={styles.name_input}>
-              <input type="text" />
-              <label>Ime</label>
-            </div>
-            <div className={styles.lastname_input}>
-              <input type="text" />
-              <label>Prezime</label>
-            </div>
-          </div>
-        </div>
-
         <div className={styles.contact_input_email_subject}>
           <div>
-            <p>Email i Predmet</p>
+            <p>Predmet</p>
           </div>
           <div className={styles.contact_input_email_subject_input}>
-            <div className={styles.email_input}>
-              <input type="text" />
-              <label>Email</label>
-            </div>
             <div className={styles.subject_input}>
               <input type="text" />
-              <label>Predmet</label>
             </div>
           </div>
         </div>
