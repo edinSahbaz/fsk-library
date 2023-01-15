@@ -1,11 +1,12 @@
 .contact_page {
-  margin-left: 50px;
+  margin-left: 7%;
+  margin-right: 7%;
   margin-bottom: 40px;
+  padding-top: 5%;
 }
 
 .contactus_text {
   border-bottom: 1px solid rgb(201, 201, 201);
-  margin-right: 40px;
 }
 
 .contactus_text h1 {
@@ -15,6 +16,6 @@
 
 @media only screen and (max-width: 900px) {
   .contact_page {
-    padding-top: 30px;
+    padding-top: 13%;
   }
 }

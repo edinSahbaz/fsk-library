@@ -5,7 +5,14 @@ import { authContext } from "./../lib/context/AuthContext";
 import { useState, useEffect, useContext, createContext } from "react";
 import { onAuthStateChanged, sendEmailVerification } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
-import { doc, getDoc, collection, limit, query, onSnapshot } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  limit,
+  query,
+  onSnapshot,
+} from "firebase/firestore";
 import Preloader from "./Preloader";
 import { toast, Toaster } from "react-hot-toast";
 
@@ -55,7 +62,7 @@ const Layout = ({ children }) => {
   // Get the collection of books from firebase
   useEffect(() => {
     const booksCollRef = collection(db, "books");
-    const q = query(booksCollRef, limit(20));
+    const q = query(booksCollRef, limit(1));
 
     let temp = [];
     const unsub = onSnapshot(q, (qSnap) => {
