@@ -53,19 +53,21 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {
-          user && user.user.email === "biblioteka@fsk.unsa.ba" && (
-            <Link href="/admin">
-              <span
-                className={`${styles.link} ${
-                  router.pathname === "/admin" ? styles.active : ""
-                }`}
-              >
-                Admin
-              </span>
-            </Link>
-          )
-        }
+        {user && user.user.email === "biblioteka@fsk.unsa.ba" && (
+          <Link href="/admin">
+            <span
+              className={`${styles.link} ${
+                router.pathname === "/admin" ? styles.active : ""
+              }`}
+            >
+              Admin
+            </span>
+          </Link>
+        )}
+
+        {/* <button className={styles.btnMobile} onClick={logout}>
+          Odjavi se
+        </button> */}
       </div>
 
       <div className={styles.right_part}>
