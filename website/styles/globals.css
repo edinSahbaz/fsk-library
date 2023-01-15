@@ -34,3 +34,16 @@ main {
 ::-webkit-scrollbar-thumb:hover {
   background: #ccc;
 }
+
+.unauthorized{
+  height: calc(100vh - 15em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unauthorized p{
+  color: red;
+  font-weight: bold;
+  font-size: 2em;
+}

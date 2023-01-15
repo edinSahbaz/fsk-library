@@ -53,6 +53,7 @@ const BookDetails = () => {
             width="250px"
             height="240px"
             objectFit="contain"
+            alt="slika"
           ></Image>
         </div>
         <div className={styles.right_div}>

@@ -4,9 +4,11 @@ import Image from "next/image";
 import { signOut } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import { useRouter } from "next/router";
+import { useUser } from "./Layout";
 
 const Navbar = () => {
   const router = useRouter();
+  const user = useUser();
 
   const logout = () => {
     signOut(auth);
@@ -41,16 +43,6 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <Link href="/knjige">
-          <span
-            className={`${styles.link} ${
-              router.pathname === "/knjige" ? styles.active : ""
-            }`}
-          >
-            Knjige
-          </span>
-        </Link>
-
         <Link href="/kontakt">
           <span
             className={`${styles.link} ${
@@ -61,15 +53,19 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <Link href="/admin">
-          <span
-            className={`${styles.link} ${
-              router.pathname === "/admin" ? styles.active : ""
-            }`}
-          >
-            Admin
-          </span>
-        </Link>
+        {
+          user && user.user.email === "biblioteka@fsk.unsa.ba" && (
+            <Link href="/admin">
+              <span
+                className={`${styles.link} ${
+                  router.pathname === "/admin" ? styles.active : ""
+                }`}
+              >
+                Admin
+              </span>
+            </Link>
+          )
+        }
       </div>
 
       <div className={styles.right_part}>
