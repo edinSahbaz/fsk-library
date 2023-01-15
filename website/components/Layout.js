@@ -3,11 +3,11 @@ import Footer from "./Footer";
 import AuthForm from "./AuthForm";
 import { authContext } from "./../lib/context/AuthContext";
 import { useState, useEffect, useContext, createContext } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, sendEmailVerification } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, limit, query, onSnapshot } from "firebase/firestore";
 import Preloader from "./Preloader";
-import { Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 const Context = createContext();
 
@@ -54,22 +54,37 @@ const Layout = ({ children }) => {
 
   // Get the collection of books from firebase
   useEffect(() => {
-    (async () => {
-      const booksCollRef = collection(db, "books");
-      const bookSnapshots = await getDocs(booksCollRef);
-      const docs = bookSnapshots.docs.map((doc) => {
-        const data = doc.data();
-        data.id = doc.id;
-        return data;
-      });
-      setBooks(docs);
-    })();
+    const booksCollRef = collection(db, "books");
+    const q = query(booksCollRef, limit(10))
+
+    let temp = []
+    const unsub = onSnapshot(q, qSnap => {
+      qSnap.forEach(book => {
+        const data = book.data();
+        data.id = book.id;
+
+        temp.push(data);
+      })
+    })
+
+    setBooks(temp);
+
+    return () => {
+      unsub();
+    }
   }, []);
 
   useEffect(() => {
     if (userDB === null) return;
     setLoading(false);
   }, [userDB]);
+
+  const sendReq = () => {
+    if(!user) return;
+
+    toast.success("Zahtjev poslan!");
+    sendEmailVerification(user);
+  }
 
   // expose to the context
   const exposedToContext = { books };
@@ -84,10 +99,26 @@ const Layout = ({ children }) => {
                 <AuthForm />
               ) : (
                 <>
-                  <Navbar />
-                  <Toaster position="top-right" />
-                  {children}
-                  <Footer />
+                  {
+                    user.emailVerified ? (
+                      <>
+                        <Navbar />
+                        <Toaster position="top-right" />
+                        {children}
+                        <Footer />
+                      </>
+                    ) : (
+                      <>
+                        <Navbar />
+                        <Toaster position="top-right" />
+                        <div className="unauthorized">
+                          <h2>Potvrdite svoju email adresu!</h2>
+                          <p>Ukoliko ne vidite email za potvrdu adrese, provjerite spam ili <span onClick={sendReq} className="linkAuth">pošaljite zahtjev ponovo.</span></p>
+                        </div>
+                        <Footer />
+                      </>
+                    )
+                  }
                 </>
               )}
             </>

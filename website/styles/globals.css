@@ -34,3 +34,26 @@ main {
 ::-webkit-scrollbar-thumb:hover {
   background: #ccc;
 }
+
+.unauthorized{
+  height: calc(100vh - 15em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.unauthorized p {
+  margin: 0;
+}
+
+.linkAuth {
+  cursor: pointer;
+  color: rgb(55, 122, 181);
+  transition: 0.4s ease-in;
+}
+
+.linkAuth:hover {
+  cursor: pointer;
+  color: rgb(53, 152, 238);
+}
