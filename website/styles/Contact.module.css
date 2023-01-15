@@ -38,7 +38,7 @@
   }
 }
 
-@media only screen and (min-width: 901px) {
+@media only screen and (min-width: 901px) and (max-width: 1000px) {
   .contact_page {
     padding-top: 6%;
     margin-left: 0%;

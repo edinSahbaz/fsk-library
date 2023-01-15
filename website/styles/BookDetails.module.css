@@ -125,3 +125,18 @@
   font-style: italic;
   color: rgb(87, 100, 126);
 }
+
+@media only screen and (max-width: 900px) {
+  .top_div {
+    flex-direction: column;
+  }
+  .bottom_div {
+    flex-direction: column-reverse;
+  }
+  .top_div * {
+    margin-left: 0;
+  }
+  .bottom_div * {
+    margin-left: 0;
+  }
+}
