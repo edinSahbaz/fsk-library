@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, cloneElement } from "react";
 import styles from "../../styles/BookDetails.module.css";
 import { db } from "../../lib/firebase";
-import { collection, doc, getDoc, addDoc, Timestamp } from "firebase/firestore";
+import { collection, doc, getDoc, addDoc, Timestamp, updateDoc, query, where, getDocs, onSnapshot } from "firebase/firestore";
 import Image from "next/image";
 
 import { useUser } from "../../components/Layout";
+import { toast } from "react-hot-toast";
 
 const BookDetails = () => {
   const router = useRouter();
@@ -16,29 +17,57 @@ const BookDetails = () => {
 
   // Get the current book
   useEffect(() => {
-    const userRef = doc(db, "books", bookId);
+    const bookRef = doc(db, "books", bookId);
 
-    (async () => {
-      const bookSnapshot = await getDoc(userRef);
+    const unsub = onSnapshot(bookRef, bookSnapshot => {
       if (bookSnapshot.exists()) {
         setBook(bookSnapshot.data());
       } else {
         alert("Knjiga ne postoji!");
       }
-    })();
+    })
+
+    return () => {
+      unsub();
+    }
   }, []);
 
   //Send the current book to bookRequests
   const requestBook = () => {
     (async () => {
+      if(book.quantity < 1 || typeof book.quantity !== 'number') {
+        toast.error("Knjiga nije dostupna!");
+        return;
+      }
+
+      // Check if already requested
       const bookRequestsRef = collection(db, "bookRequests");
+      const reqQ = query(bookRequestsRef, where('userId', '==', userId), where('bookId', '==', bookId));
+
+      const reqData = await getDocs(reqQ);
+      if(reqData.docs[0]?.exists()) {
+        toast.error("Zathejv za knjigu već postoji!");
+        return;
+      }
+
+      // Check if already leased
+      const leasedBooksRef = collection(db, "leasedBooks");
+      const leasedQ = query(leasedBooksRef, where('userId', '==', userId), where('bookId', '==', bookId));
+
+      const leasedData = await getDocs(leasedQ);
+      if(leasedData.docs[0]?.exists()) {
+        toast.error("Knjiga već izdata!");
+        return;
+      }
 
       addDoc(bookRequestsRef, {
         bookId,
         userId,
         addedTime: Timestamp.now(),
+      }).then(() => {
+        toast.success("Zathejv za knjigu poslan!");
       }).catch((error) => {
-        alert("Nemoguce!");
+        toast.error(error.message);
       });
     })();
   };

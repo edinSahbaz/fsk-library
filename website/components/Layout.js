@@ -5,7 +5,7 @@ import { authContext } from "./../lib/context/AuthContext";
 import { useState, useEffect, useContext, createContext } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
-import { doc, getDoc, collection, getDocs, limit, query } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, limit, query, onSnapshot } from "firebase/firestore";
 import Preloader from "./Preloader";
 import { Toaster } from "react-hot-toast";
 
@@ -54,17 +54,24 @@ const Layout = ({ children }) => {
 
   // Get the collection of books from firebase
   useEffect(() => {
-    (async () => {
-      const booksCollRef = collection(db, "books");
-      const q = query(booksCollRef, limit(10))
-      const bookSnapshots = await getDocs(q);
-      const docs = bookSnapshots.docs.map((doc) => {
-        const data = doc.data();
-        data.id = doc.id;
-        return data;
-      });
-      setBooks(docs);
-    })();
+    const booksCollRef = collection(db, "books");
+    const q = query(booksCollRef, limit(10))
+
+    let temp = []
+    const unsub = onSnapshot(q, qSnap => {
+      qSnap.forEach(book => {
+        const data = book.data();
+        data.id = book.id;
+
+        temp.push(data);
+      })
+    })
+
+    setBooks(temp);
+
+    return () => {
+      unsub();
+    }
   }, []);
 
   useEffect(() => {
