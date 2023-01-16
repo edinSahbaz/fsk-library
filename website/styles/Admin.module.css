@@ -4,7 +4,6 @@
 }
 
 .heading {
-  margin-top: 5em;
 }
 
 .container {
@@ -28,6 +27,7 @@
 .content {
   flex: 85%;
   padding: 30px;
+  margin-top: 5em;
 }
 
 .sidebar_header {
