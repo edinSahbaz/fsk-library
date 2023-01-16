@@ -64,10 +64,6 @@ const Navbar = () => {
             </span>
           </Link>
         )}
-
-        {/* <button className={styles.btnMobile} onClick={logout}>
-          Odjavi se
-        </button> */}
       </div>
 
       <div className={styles.right_part}>
