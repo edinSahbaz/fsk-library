@@ -1,10 +1,10 @@
 import { useState } from "react";
-import styles from "./../styles/AddBook.module.css";
+import styles from "./../../styles/AddBook.module.css";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "./../lib/firebase";
+import { db } from "./../../lib/firebase";
 import toast from "react-hot-toast";
 
-const AddBook = ({ setShowModal }) => {
+const AddBook = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [aboutBook, setAboutBook] = useState("");
@@ -38,10 +38,6 @@ const AddBook = ({ setShowModal }) => {
   };
 
   return (
-    <div
-      className={`${styles.shadow} animate__animated animate__fadeIn animate__faster`}
-      onClick={() => setShowModal(false)}
-    >
       <div className={styles.form} onClick={(e) => e.stopPropagation()}>
         <h2>Dodaj knjigu</h2>
 
@@ -100,7 +96,6 @@ const AddBook = ({ setShowModal }) => {
           <button onClick={() => setShowModal(false)}>Odustani</button>
         </div>
       </div>
-    </div>
   );
 };
 
