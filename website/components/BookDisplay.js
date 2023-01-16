@@ -19,8 +19,6 @@ const BookDisplay = () => {
     const booksQ = search.length > 0 ? query(colRef, where(field, '>=', search), where(field, '<', search + '\uf8ff'), limit(amount)) : 
                     query(colRef, orderBy(field), limit(amount));
     
-                    const avc = getDocs(booksQ)
-
     const unsub = onSnapshot(booksQ, qSnap => {
       let temp = [];
       qSnap.forEach(book => {
@@ -31,8 +29,6 @@ const BookDisplay = () => {
       })
       setBooks(temp);
     })
-
-    console.log(amount,search,field)
 
     return () => {
       unsub();

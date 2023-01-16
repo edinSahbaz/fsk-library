@@ -47,6 +47,7 @@
   transition: background-color 0.15s;
   transition: color 0.15s;
   white-space: nowrap;
+  user-select: none;
   cursor: pointer;
 }
 
