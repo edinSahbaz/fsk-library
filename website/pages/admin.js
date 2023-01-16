@@ -79,8 +79,8 @@ const Admin = () => {
       {/* SIDEBAR MENU */}
       {user && user.user.email === "biblioteka@fsk.unsa.ba" ? (
         <div className={styles.container}>
-          <div class={styles.sidebar}>
-            <div class={styles.sidebar_header}>
+          <div className={styles.sidebar}>
+            <div className={styles.sidebar_header}>
               <h3>Dashboard - Admin</h3>
             </div>
             <div

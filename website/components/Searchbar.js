@@ -1,7 +1,16 @@
 import styles from "../styles/Searchbar.module.css";
 import Image from "next/image";
+import { useState } from "react";
 
-const Searchbar = () => {
+const Searchbar = ({setSearch, setField}) => {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const search = (e) => {
+    if(e.key !== 'Enter') return;
+
+    setSearch(searchTerm);
+  }
+
   return (
     <div className={styles.searchbar_element}>
       <div>
@@ -13,20 +22,19 @@ const Searchbar = () => {
           <input
             className={styles.searchbar}
             placeholder="Pretraži biblioteku..."
+            onChange={e => setSearchTerm(e.target.value)}
+            onKeyDown={search}
           ></input>
 
           <div className={styles.radio_toolbar}>
-            <input type="radio" id="radio1" name="radios" defaultChecked />
-            <label htmlFor="radio1">Sva polja</label>
-
-            <input type="radio" id="radio2" name="radios" />
-            <label htmlFor="radio2">Pisci</label>
-
-            <input type="radio" id="radio3" name="radios" />
+            <input type="radio" id="radio3" name="radios" value='name' onChange={e => setField(e.target.value)}/>
             <label htmlFor="radio3">Naslovi</label>
+
+            <input type="radio" id="radio2" name="radios" value='author' onChange={e => setField(e.target.value)} />
+            <label htmlFor="radio2">Pisci</label>
           </div>
         </div>
-        <button className={styles.btn_search}>
+        <button className={styles.btn_search} onClick={() => setSearch(searchTerm)}>
           <Image
             className={styles.search_icon}
             alt="search"
@@ -37,7 +45,7 @@ const Searchbar = () => {
         </button>
       </div>
       <div className={styles.dropdown_main}>
-        <select name="authors">
+        {/* <select name="authors">
           <option value="Pisac">Pisac</option>
           <option value="PisacX">PisacX</option>
           <option value="PisacX">PisacX</option>
@@ -53,7 +61,7 @@ const Searchbar = () => {
           <option value="PisacX">PisacX</option>
           <option value="PisacX">PisacX</option>
           <option value="PisacX">PisacX</option>
-        </select>
+        </select> */}
       </div>
     </div>
   );

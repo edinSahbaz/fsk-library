@@ -62,7 +62,7 @@ const Layout = ({ children }) => {
   // Get the collection of books from firebase
   useEffect(() => {
     const booksCollRef = collection(db, "books");
-    const q = query(booksCollRef, limit(1));
+    const q = query(booksCollRef, limit(20));
 
     let temp = [];
     const unsub = onSnapshot(q, (qSnap) => {
@@ -88,6 +88,7 @@ const Layout = ({ children }) => {
 
   const sendReq = () => {
     if (!user) return;
+    if (user.emailVerified) return;
 
     toast.success("Zahtjev poslan!");
     sendEmailVerification(user);
@@ -141,8 +142,6 @@ const Layout = ({ children }) => {
   );
 };
 
-// export useBooks hook
-export const useBooks = () => useContext(Context);
 export const useUser = () => useContext(authContext);
 
 export default Layout;
