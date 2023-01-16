@@ -2,16 +2,15 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  onSnapshot,
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { db } from "../lib/firebase";
-import { useBooks } from "./Layout";
 
 const Lease = ({ bookId, userId, id }) => {
-  const { books } = useBooks();
   const [user, setUser] = useState("");
   const [bookName, setBookName] = useState("");
   const [bookQuantity, setBookQuantity] = useState(0);
@@ -30,10 +29,21 @@ const Lease = ({ bookId, userId, id }) => {
   }, []);
 
   useEffect(() => {
-    const book = books.filter((book) => book.id == bookId)[0];
-    setBookName(book.name);
-    setBookQuantity(book.quantity);
-  }, [books]);
+    if(!bookId) return;
+
+    const bookRef = doc(db, 'books', bookId);
+    const unsub = onSnapshot(bookRef, docSnap => {
+      if(!docSnap.exists()) return;
+
+      const data = docSnap.data();
+      setBookName(data.name);
+      setBookQuantity(data.quantity);
+    })
+
+    return () => {
+      unsub()
+    }
+  }, []);
 
   const confirmLease = () => {
     const ordersRef = doc(db, "leasedBooks", id);

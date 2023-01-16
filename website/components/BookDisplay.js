@@ -1,36 +1,52 @@
 import styles from "../styles/BookDisplay.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useBooks } from "./Layout";
 import { useEffect, useState } from "react";
-import { storage } from "../lib/firebase";
+import { db, storage } from "../lib/firebase";
 import { getDownloadURL, ref } from "firebase/storage";
+import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore";
 
 const BookDisplay = () => {
-  const { books } = useBooks();
+  const [books, setBooks] = useState([]);
   const [bookImgs, setBookImgs] = useState({});
 
+  // useEffect(() => {
+  //   let temp = {};
+  //   books.forEach(async (book) => {
+  //     if (book.image) {
+  //       const imgName = book.image;
+  //       const bookImgRef = ref(storage, `books/${book.id}/${imgName}`);
+
+  //       const url = await getDownloadURL(bookImgRef);
+  //       setBookImgs((prev) => {
+  //         return { ...prev, [book.id]: url };
+  //       });
+  //     }
+  //   });
+
+  //   setBookImgs(temp);
+  //   return () => {};
+  // }, [books]);
+
   useEffect(() => {
-    if (!books) return;
+    const colRef = collection(db, 'books');
+    const q = query(colRef, orderBy('name'), limit(20));
 
-    let temp = {};
-    books.forEach(async (book) => {
-      if (book.image) {
-        const imgName = book.image;
-        const bookImgRef = ref(storage, `books/${book.id}/${imgName}`);
+    const unsub = onSnapshot(q, qSnap => {
+      let temp = [];
+      qSnap.forEach(book => {
+        const data = book.data();
+        data.id = book.id;
 
-        const url = await getDownloadURL(bookImgRef);
-        setBookImgs((prev) => {
-          return { ...prev, [book.id]: url };
-        });
-      }
-    });
+        temp.push(data);
+      })
+      setBooks(temp);
+    })
 
-    setBookImgs(temp);
-    console.log(temp);
-
-    return () => {};
-  }, [books]);
+    return () => {
+      unsub();
+    }
+  }, [])
 
   return (
     <div className={styles.main}>
@@ -69,6 +85,9 @@ const BookDisplay = () => {
             </div>
           </Link>
         ))}
+      <button>
+        Učitaj više
+      </button>
     </div>
   );
 };
