@@ -222,7 +222,6 @@ const BookDetails = () => {
                 <span className="inputContainer">
                   {canEdit ? (
                     <textarea
-                      disabled={!canEdit}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       type="text"
@@ -231,9 +230,8 @@ const BookDetails = () => {
                   ) : (
                     <span className={styles.text_area}>
                       <textarea
-                        disabled={!canEdit}
+                        disabled
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
                         type="text"
                         className="controlledInput large"
                       />
@@ -260,7 +258,6 @@ const BookDetails = () => {
                 <span className="inputContainer">
                   {canEdit ? (
                     <textarea
-                      disabled={!canEdit}
                       value={aboutBook}
                       onChange={(e) => setAboutBook(e.target.value)}
                       type="text"
@@ -269,9 +266,8 @@ const BookDetails = () => {
                   ) : (
                     <span className={styles.text_area}>
                       <textarea
-                        disabled={!canEdit}
+                        disabled
                         value={aboutBook}
-                        onChange={(e) => setAboutBook(e.target.value)}
                         type="text"
                         className="controlledInput normal"
                       />
@@ -347,7 +343,6 @@ const BookDetails = () => {
               <span className="inputContainer">
                 {canEdit ? (
                   <textarea
-                    disabled={!canEdit}
                     value={aboutAuthor}
                     type="text"
                     onChange={(e) => setAboutAuthor(e.target.value)}
@@ -356,10 +351,9 @@ const BookDetails = () => {
                 ) : (
                   <span className={styles.text_area}>
                     <textarea
-                      disabled={!canEdit}
+                      disabled
                       value={aboutAuthor}
                       type="text"
-                      onChange={(e) => setAboutAuthor(e.target.value)}
                       className="controlledInput normal"
                     />
                   </span>
