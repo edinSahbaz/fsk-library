@@ -62,7 +62,7 @@ const Layout = ({ children }) => {
   // Get the collection of books from firebase
   useEffect(() => {
     const booksCollRef = collection(db, "books");
-    const q = query(booksCollRef, limit(1));
+    const q = query(booksCollRef, limit(20));
 
     let temp = [];
     const unsub = onSnapshot(q, (qSnap) => {

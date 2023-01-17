@@ -170,9 +170,9 @@ const LeasedBooks = () => {
       </div>
 
       <div>
-        {leases ? (
+        {leasesCopy ? (
           <>
-            {leases.length > 0 ? (
+            {leasesCopy.length > 0 ? (
               <>
                 {/*  */}
                 <div>
@@ -212,11 +212,19 @@ const LeasedBooks = () => {
                 {/*  */}
               </>
             ) : (
-              <p>Nema trenutno izdatih knjiga.</p>
+              <p>
+                {!searchTerm
+                  ? "Nema novih zahtjeva za knjige."
+                  : "Nije pronaden student sa tim imenom."}
+              </p>
             )}
           </>
         ) : (
-          <p>Nema trenutno izdatih knjiga.</p>
+          <p>
+            {!searchTerm
+              ? "Nema novih zahtjeva za knjige."
+              : "Nije pronaden student sa tim imenom."}
+          </p>
         )}
       </div>
 

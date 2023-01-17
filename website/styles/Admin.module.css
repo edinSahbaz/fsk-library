@@ -1,3 +1,16 @@
+.main {
+  background-color: white;
+  height: 80vh;
+  overflow: scroll;
+  padding: 20px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+.main h2 {
+  border-bottom: 1px solid gainsboro;
+  padding-bottom: 10px;
+}
+
 .container {
   /* margin: 0 2em; */
   min-height: 100vh;

@@ -4,7 +4,6 @@ import { db } from "../../lib/firebase";
 import Request from "../Request";
 import styles from "../../styles/BookRequests.module.css";
 import Image from "next/image";
-//
 import React from "react";
 
 const BookRequests = () => {
@@ -207,11 +206,19 @@ const BookRequests = () => {
                 {/*  */}
               </>
             ) : (
-              <p>{!searchTerm ? "Nema novih zahtjeva za knjige." : "kraj"}</p>
+              <p>
+                {!searchTerm
+                  ? "Nema novih zahtjeva za knjige."
+                  : "Nije pronaden student sa tim imenom."}
+              </p>
             )}
           </>
         ) : (
-          <p>{!searchTerm ? "Nema novih zahtjeva za knjige." : "kraj"}</p>
+          <p>
+            {!searchTerm
+              ? "Nema novih zahtjeva za knjige."
+              : "Nije pronaden student sa tim imenom."}
+          </p>
         )}
       </div>
 

@@ -1,14 +1,13 @@
 import styles from "./../../styles/Admin.module.css";
 
 const Main = () => {
-    return ( 
-        <div>
-            <div className={styles.heading}>
-              <h1>Dashboard - Admin</h1>
-            </div>
+  return (
+    <div className={styles.main}>
+      <div className={styles.heading}>
+        <h2>Dashboard - Admin</h2>
+      </div>
+    </div>
+  );
+};
 
-        </div>
-     );
-}
- 
 export default Main;
