@@ -11,7 +11,7 @@ const ContactForm = () => {
   const [message, setMessage] = useState('');
 
   const sendEmail = () => {
-    const colRef = collection(db, 'mail');
+    const colRef = collection(db, 'messages');
 
     const mailData = {
       to: 'biblioteka@fsk.unsa.ba',
