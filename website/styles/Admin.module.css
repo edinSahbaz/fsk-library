@@ -173,3 +173,37 @@
   background-color: rgb(55, 122, 181);
   color: white;
 }
+
+.allow_button {
+  background-color: rgb(87, 198, 151);
+  color: white;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  min-width: 100px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+.allow_button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.deny_button {
+  background-color: rgb(237, 140, 122);
+  color: white;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border: none;
+  border-radius: 5px;
+}
+
+.deny_button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
