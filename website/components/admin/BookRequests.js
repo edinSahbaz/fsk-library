@@ -46,27 +46,27 @@ const BookRequests = () => {
   // makes the body not scrollable if the mouse is ona div
   // that is scrollable.
   const ref = React.useRef(null);
-  useEffect(() => {
-    const handleMouseOver = () => {
-      const divHeight = ref.current.getBoundingClientRect().height;
-      if (divHeight < ref.current.scrollHeight) {
-        document.body.style.overflow = "hidden";
-      }
-    };
+  // useEffect(() => {
+  //   const handleMouseOver = () => {
+  //     const divHeight = ref.current.getBoundingClientRect().height;
+  //     if (divHeight < ref.current.scrollHeight) {
+  //       document.body.style.overflow = "hidden";
+  //     }
+  //   };
 
-    const handleMouseOut = () => {
-      document.body.style.overflow = "auto";
-    };
+  //   const handleMouseOut = () => {
+  //     document.body.style.overflow = "auto";
+  //   };
 
-    ref.current.addEventListener("mouseover", handleMouseOver);
-    ref.current.addEventListener("mouseout", handleMouseOut);
-    return () => {
-      if (ref.current) {
-        ref.current.removeEventListener("mouseover", handleMouseOver);
-        ref.current.removeEventListener("mouseout", handleMouseOut);
-      }
-    };
-  }, []);
+  //   ref.current.addEventListener("mouseover", handleMouseOver);
+  //   ref.current.addEventListener("mouseout", handleMouseOut);
+  //   return () => {
+  //     if (ref.current) {
+  //       ref.current.removeEventListener("mouseover", handleMouseOver);
+  //       ref.current.removeEventListener("mouseout", handleMouseOut);
+  //     }
+  //   };
+  // }, []);
 
   const resetShowingRequests = () => {
     const startIndex = (currentPage - 1) * numberOfRequestsToShow;

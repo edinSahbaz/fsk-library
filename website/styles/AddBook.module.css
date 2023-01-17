@@ -1,9 +1,9 @@
 .main {
   background-color: white;
   height: 80vh;
-  overflow: scroll;
   padding: 20px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
 }
 
 .main h2 {
@@ -14,5 +14,5 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 8px;
 }

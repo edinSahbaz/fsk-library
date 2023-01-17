@@ -103,9 +103,20 @@ const Request = ({ bookId, userId, id, addedTime }) => {
     toast.promise(loading, {
       loading: "Odobravanje zahtjeva...",
       success: "Zahtjev uspješno odobren!",
-      error: "Greška...",
+      error: "Odobravanje zahtjeva...",
     });
   };
+
+  const denyRequest = () => {
+    const reqRef = doc(db, "bookRequests", id);
+    const loading = deleteDoc(reqRef);
+
+    toast.promise(loading, {
+      loading: "Brisanje zahtjeva...",
+      success: "Brisanje zahtjeva...",
+      error: "Brisanje zahtjeva...",
+    });
+  }
 
   return (
     <tr>
@@ -121,7 +132,7 @@ const Request = ({ bookId, userId, id, addedTime }) => {
         <button className={styles.allow_button} onClick={confirmLease}>
           Odobri
         </button>
-        <button className={styles.deny_button}>Odbij</button>
+        <button className={styles.deny_button} onClick={denyRequest}>Odbij</button>
       </td>
     </tr>
   );

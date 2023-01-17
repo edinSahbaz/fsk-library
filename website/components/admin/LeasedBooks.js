@@ -213,7 +213,7 @@ const LeasedBooks = () => {
             ) : (
               <p>
                 {!searchTerm
-                  ? "Nema novih zahtjeva za knjige."
+                  ? "Nema trenutno izdatih knjiga."
                   : "Nije pronaden student sa tim imenom."}
               </p>
             )}
@@ -221,7 +221,7 @@ const LeasedBooks = () => {
         ) : (
           <p>
             {!searchTerm
-              ? "Nema novih zahtjeva za knjige."
+              ? "Nema trenutno izdatih knjiga."
               : "Nije pronaden student sa tim imenom."}
           </p>
         )}
