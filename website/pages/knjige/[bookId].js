@@ -120,6 +120,7 @@ const BookDetails = () => {
         bookId,
         userId,
         addedTime: Timestamp.now(),
+        userName: userDB.name + " " + userDB.surname,
       })
         .then(() => {
           toast.success("Zathejv za knjigu poslan!");
