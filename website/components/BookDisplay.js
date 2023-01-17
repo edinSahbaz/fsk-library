@@ -6,7 +6,7 @@ import { db, storage } from "../lib/firebase";
 import { getDownloadURL, ref } from "firebase/storage";
 import {
   collection,
-  getDocs,
+  getCountFromServer,
   limit,
   onSnapshot,
   orderBy,
@@ -21,18 +21,31 @@ const BookDisplay = () => {
   const [amount, setAmount] = useState(10);
   const [search, setSearch] = useState("");
   const [field, setField] = useState("name");
+  const [numOfBooks, setNumOfBooks] = useState(0);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [amount, numOfBooks]);
 
-  function handleScroll() {
+  const handleScroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+    if(amount >= numOfBooks) return;
     setAmount(prev => prev + 10);
   }
 
+  const getNumOfBooks = async () => {
+    const ref = collection(db, 'books')
+    const retData = await getCountFromServer(ref);
+    setNumOfBooks(retData.data().count);
+  }
+
   useEffect(() => {
+    getNumOfBooks()
+  }, [])
+
+  useEffect(() => {
+    console.log(amount)
     const colRef = collection(db, "books");
     const booksQ =
       search.length > 0
@@ -120,6 +133,7 @@ const BookDisplay = () => {
             </Link>
           ))}
       </div>
+      <p className={styles.numOfBooks}>Prikazano {books && books.length} od {numOfBooks && numOfBooks} knjiga.</p>
     </>
   );
 };
