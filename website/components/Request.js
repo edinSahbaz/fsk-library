@@ -87,6 +87,7 @@ const Request = ({ bookId, userId, id, addedTime }) => {
       userId,
       addedTime: Timestamp.now(),
       mustReturnBefore: returnTimestamp,
+      userName: user,
     }).then(() => {
       if (bookQuantity > 0) {
         updateDoc(doc(db, "books", bookId), {
