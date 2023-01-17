@@ -124,6 +124,10 @@
   border-bottom: 5px solid white;
 }
 
+.td {
+  border: 1px solid black;
+  padding: 8px;
+}
 .reversed_arrow {
   display: inline-block;
   width: 0;
