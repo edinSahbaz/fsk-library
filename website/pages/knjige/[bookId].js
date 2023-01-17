@@ -18,7 +18,7 @@ import {
 import Image from "next/image";
 
 import { useUser } from "../../components/Layout";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import ImageModal from "../../components/ImageModal";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -145,12 +145,11 @@ const BookDetails = () => {
       aboutBook,
     });
 
-    if (image)
-      toast.promise(loading, {
-        loading: "Spremanje promjena...",
-        success: "Spremanje promjena...",
-        error: "Spremanje promjena...",
-      });
+    toast.promise(loading, {
+      loading: "Spremanje promjena...",
+      success: "Spremanje promjena...",
+      error: "Spremanje promjena...",
+    });
   };
 
   useEffect(() => {
