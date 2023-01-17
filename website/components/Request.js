@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { db } from "../lib/firebase";
 import styles from "../styles/Request.module.css";
+import firebase from "firebase/app";
 
 const Request = ({ bookId, userId, id, addedTime }) => {
   const [user, setUser] = useState("");
@@ -19,6 +20,7 @@ const Request = ({ bookId, userId, id, addedTime }) => {
   const [bookQuantity, setBookQuantity] = useState(0);
   const [bookISBN, setBookISBN] = useState("");
   const [requestAddedDate, setRequestAddedDate] = useState();
+  const [returnTimestamp, setReturnTimestamp] = useState(null);
 
   const getUserName = async () => {
     const ref = doc(db, "users", userId);
@@ -61,7 +63,22 @@ const Request = ({ bookId, userId, id, addedTime }) => {
     };
   }, []);
 
+  const handleDateChange = (event) => {
+    const dateValue = event.target.value;
+    if (!dateValue) {
+      setReturnTimestamp(null);
+    } else {
+      const dateObject = new Date(dateValue);
+      const timestamp = Timestamp.fromDate(dateObject);
+      setReturnTimestamp(timestamp);
+    }
+  };
+
   const confirmLease = () => {
+    if (!returnTimestamp) {
+      toast.error(`Molimo odaberite datum vraćanja!`);
+      return null;
+    }
     const leasesRef = collection(db, "leasedBooks");
     const reqRef = doc(db, "bookRequests", id);
 
@@ -69,6 +86,7 @@ const Request = ({ bookId, userId, id, addedTime }) => {
       bookId,
       userId,
       addedTime: Timestamp.now(),
+      mustReturnBefore: returnTimestamp,
     }).then(() => {
       if (bookQuantity > 0) {
         updateDoc(doc(db, "books", bookId), {
@@ -96,7 +114,7 @@ const Request = ({ bookId, userId, id, addedTime }) => {
       <td className={`${styles.td}`}>{bookQuantity}</td>
       <td className={`${styles.td}`}>{requestAddedDate}.</td>
       <td className={`${styles.td}`}>
-        <input type="date" />
+        <input type="date" onChange={handleDateChange} />
       </td>
       <td className={`${styles.td} ${styles.options}`}>
         <button className={styles.allow_button} onClick={confirmLease}>
@@ -104,11 +122,6 @@ const Request = ({ bookId, userId, id, addedTime }) => {
         </button>
         <button className={styles.deny_button}>Odbij</button>
       </td>
-
-      {/* <label>
-        {"test " + user} ({userId}) - {bookName}
-        <button onClick={confirmLease}>Odobri</button>
-      </label> */}
     </tr>
   );
 };

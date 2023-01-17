@@ -4,36 +4,51 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { db, storage } from "../lib/firebase";
 import { getDownloadURL, ref } from "firebase/storage";
-import { collection, getDocs, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import Searchbar from "./Searchbar";
 
 const BookDisplay = () => {
   const [books, setBooks] = useState([]);
   const [bookImgs, setBookImgs] = useState({});
   const [amount, setAmount] = useState(10);
-  const [search, setSearch] = useState('');
-  const [field, setField] = useState('name');
+  const [search, setSearch] = useState("");
+  const [field, setField] = useState("name");
 
   useEffect(() => {
-    const colRef = collection(db, 'books');
-    const booksQ = search.length > 0 ? query(colRef, where(field, '>=', search), where(field, '<', search + '\uf8ff'), limit(amount)) : 
-                    query(colRef, orderBy(field), limit(amount));
-    
-    const unsub = onSnapshot(booksQ, qSnap => {
+    const colRef = collection(db, "books");
+    const booksQ =
+      search.length > 0
+        ? query(
+            colRef,
+            where(field, ">=", search),
+            where(field, "<", search + "\uf8ff"),
+            limit(amount)
+          )
+        : query(colRef, orderBy(field), limit(amount));
+
+    const unsub = onSnapshot(booksQ, (qSnap) => {
       let temp = [];
-      qSnap.forEach(book => {
+      qSnap.forEach((book) => {
         const data = book.data();
         data.id = book.id;
 
         temp.push(data);
-      })
+      });
       setBooks(temp);
-    })
+    });
 
     return () => {
       unsub();
-    }
-  }, [amount, search, field])
+    };
+  }, [amount, search, field]);
 
   useEffect(() => {
     let temp = {};
@@ -54,8 +69,8 @@ const BookDisplay = () => {
   }, [books]);
 
   const increment = () => {
-    setAmount(prev => prev + 10);
-  }
+    setAmount((prev) => prev + 10);
+  };
 
   return (
     <>
@@ -70,7 +85,9 @@ const BookDisplay = () => {
                 <div className={styles.book_photo}>
                   <Image
                     src={
-                      bookImgs[book.id] ? bookImgs[book.id] : "/TempBookImage.jpg"
+                      bookImgs[book.id]
+                        ? bookImgs[book.id]
+                        : "/TempBookImage.jpg"
                     }
                     width="250px"
                     alt="img"
