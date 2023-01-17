@@ -17,7 +17,7 @@ const User = () => {
       {user && user.user.email !== "biblioteka@fsk.unsa.ba" ? (
         <div className={styles.container}>
           <p>Uskoro...</p>
-          <p>Prikaz prihvaćenih i odbijenih zahtjeva.</p>
+          <p>Prikaz prihvaćenih i odbijenih zahtjeva i poruka.</p>
         </div>
       ) : (
         <div className="unauthorized">
