@@ -1,6 +1,6 @@
 import styles from "../styles/ContactForm.module.css";
 import { useEffect, useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useUser } from "./Layout";
 import { toast } from "react-hot-toast";
@@ -18,7 +18,8 @@ const ContactForm = () => {
       message: {
         subject: subject,
         text: message
-      }
+      }, 
+      addedTime: Timestamp.now()
     }
 
     const loading = addDoc(colRef, mailData);
