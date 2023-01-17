@@ -178,7 +178,7 @@ const Users = () => {
           <tbody>
             {usersCopy &&
               users.map((user) => (
-                <tr>
+                <tr key={user.index}>
                   <td className={`${styles.td}`}>
                     {user.name} {user.surname}
                   </td>
