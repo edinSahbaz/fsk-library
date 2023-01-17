@@ -120,7 +120,6 @@ const LeasedBooks = () => {
   }, [numberOfLeasesToShow]);
 
   useEffect(() => {
-    console.log(searchTerm.length);
     if (searchTerm.length > 0) {
       const searchedRequests = leasesCopy.filter((o) => {
         return o.userName.toLowerCase().includes(searchTerm);

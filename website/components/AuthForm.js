@@ -55,7 +55,6 @@ const AuthForm = () => {
 
   const login = () => {
     signInWithEmailAndPassword(auth, email, passwrod)
-      .then((res) => console.log(res.user))
       .catch((err) => setError(err));
   };
 

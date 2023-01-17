@@ -114,7 +114,6 @@ const BookRequests = () => {
   }, [numberOfRequestsToShow]);
 
   useEffect(() => {
-    console.log(searchTerm.length);
     if (searchTerm.length > 0) {
       const searchedRequests = requestsCopy.filter((o) => {
         return o.userName.toLowerCase().includes(searchTerm);

@@ -117,14 +117,12 @@ const Users = () => {
   }, [numberOfUsersToShow]);
 
   useEffect(() => {
-    console.log(searchTerm.length);
     if (searchTerm.length > 0) {
       const searchedUsers = usersCopy.filter((o) => {
         const name = o.name + " " + o.surname;
         return name.toLowerCase().includes(searchTerm);
       });
       setUsers(searchedUsers);
-      console.log(searchedUsers);
     } else {
       resetShowingRequests();
     }
