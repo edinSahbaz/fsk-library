@@ -23,6 +23,16 @@ const BookDisplay = () => {
   const [field, setField] = useState("name");
 
   useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  function handleScroll() {
+    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+    setAmount(prev => prev + 10);
+  }
+
+  useEffect(() => {
     const colRef = collection(db, "books");
     const booksQ =
       search.length > 0
@@ -67,10 +77,6 @@ const BookDisplay = () => {
     setBookImgs(temp);
     return () => {};
   }, [books]);
-
-  const increment = () => {
-    setAmount((prev) => prev + 10);
-  };
 
   return (
     <>
