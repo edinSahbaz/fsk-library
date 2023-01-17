@@ -64,6 +64,18 @@ const Navbar = () => {
             </span>
           </Link>
         )}
+
+        {user && user.user.email !== "biblioteka@fsk.unsa.ba" && (
+          <Link href="/korisnik">
+            <span
+              className={`${styles.link} ${
+                router.pathname === "/admin" ? styles.active : ""
+              }`}
+            >
+              Profil
+            </span>
+          </Link>
+        )}
       </div>
 
       <div className={styles.right_part}>
