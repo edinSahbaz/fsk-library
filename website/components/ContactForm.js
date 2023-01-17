@@ -14,7 +14,6 @@ const ContactForm = () => {
     const colRef = collection(db, 'messages');
 
     const mailData = {
-      to: 'biblioteka@fsk.unsa.ba',
       from: user.user.email,
       message: {
         subject: subject,
