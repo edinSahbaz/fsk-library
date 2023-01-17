@@ -6,9 +6,8 @@
   border: 1px solid black;
   padding: 8px;
   user-select: none;
+  font-size: 13px;
 }
-
-/* td */
 
 .sortable {
   cursor: pointer;

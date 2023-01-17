@@ -68,12 +68,16 @@
   background-color: rgba(55, 122, 181, 0.5);
   color: white;
   cursor: pointer;
-  /* opacity: 1; */
 }
 
 .opacity1 button {
   opacity: 1;
+  border: none;
+  border-left: 5px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
+
 .opacity105 button {
   opacity: 0.5;
 }
