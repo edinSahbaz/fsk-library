@@ -9,11 +9,15 @@ import {
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { db } from "../lib/firebase";
+import styles from "../styles/Lease.module.css";
 
-const Lease = ({ bookId, userId, id }) => {
+const Lease = ({ bookId, userId, id, addedTime, mustReturnBefore }) => {
   const [user, setUser] = useState("");
   const [bookName, setBookName] = useState("");
   const [bookQuantity, setBookQuantity] = useState(0);
+  const [bookISBN, setBookISBN] = useState("");
+  const [requestAddedDate, setRequestAddedDate] = useState();
+  const [mustReturnBeforeDate, setMustReturnBeforeDate] = useState();
 
   const getUserName = async () => {
     const ref = doc(db, "users", userId);
@@ -25,24 +29,45 @@ const Lease = ({ bookId, userId, id }) => {
   };
 
   useEffect(() => {
+    var t = new Date(mustReturnBefore.seconds * 1000);
+    var date = t.toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    setMustReturnBeforeDate(date);
+  }, []);
+
+  useEffect(() => {
+    var t = new Date(addedTime.seconds * 1000);
+    var date = t.toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    setRequestAddedDate(date);
+  }, []);
+
+  useEffect(() => {
     getUserName();
   }, []);
 
   useEffect(() => {
-    if(!bookId) return;
+    if (!bookId) return;
 
-    const bookRef = doc(db, 'books', bookId);
-    const unsub = onSnapshot(bookRef, docSnap => {
-      if(!docSnap.exists()) return;
+    const bookRef = doc(db, "books", bookId);
+    const unsub = onSnapshot(bookRef, (docSnap) => {
+      if (!docSnap.exists()) return;
 
       const data = docSnap.data();
       setBookName(data.name);
       setBookQuantity(data.quantity);
-    })
+      setBookISBN(data.ISBN);
+    });
 
     return () => {
-      unsub()
-    }
+      unsub();
+    };
   }, []);
 
   const confirmLease = () => {
@@ -69,12 +94,19 @@ const Lease = ({ bookId, userId, id }) => {
   };
 
   return (
-    <div>
-      <label>
-        {user} ({userId}) - {bookName}
-        <button onClick={confirmLease}>Vraćeno</button>
-      </label>
-    </div>
+    <tr>
+      <td className={`${styles.td}`}>{user}</td>
+      <td className={`${styles.td}`}>{bookName}</td>
+      <td className={`${styles.td}`}>{bookISBN}</td>
+      <td className={`${styles.td}`}>{bookQuantity}</td>
+      <td className={`${styles.td}`}>{requestAddedDate}.</td>
+      <td className={`${styles.td}`}>{mustReturnBeforeDate}</td>
+      <td className={`${styles.td} ${styles.options}`}>
+        <button className={styles.deny_button} onClick={confirmLease}>
+          Obrisi
+        </button>
+      </td>
+    </tr>
   );
 };
 

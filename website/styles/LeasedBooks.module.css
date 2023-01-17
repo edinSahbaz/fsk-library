@@ -1,0 +1,158 @@
+.main {
+  background-color: white;
+  height: 80vh;
+  overflow: scroll;
+  padding: 20px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+.main h2 {
+  border-bottom: 1px solid gainsboro;
+  padding-bottom: 10px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.th {
+  border: 1px solid black;
+  padding: 8px;
+  user-select: none;
+  font-size: 13px;
+}
+
+.sortable {
+  cursor: pointer;
+}
+
+.arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  vertical-align: middle;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid white;
+}
+
+.reversed_arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  vertical-align: middle;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid white;
+  transform: rotate(180deg);
+}
+
+.book_name_td {
+  position: relative;
+  padding: 0;
+  width: fit-content;
+}
+
+/*  */
+
+/*  */
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+}
+
+.table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(55, 122, 181);
+  color: white;
+}
+
+/* OKOLO DIVA */
+.topDiv {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.numberOfRequestsDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.numberOfRequestsDiv p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.searchBarDiv {
+  display: flex;
+}
+
+.searchBarDiv input {
+  padding-right: 70px;
+  box-shadow: 0px 0px 20px #eee inset;
+  border: 1px solid gray;
+  padding-left: 5px;
+}
+
+.searchBarDiv button {
+  background-color: rgb(55, 122, 181);
+  border: none;
+  padding: 10px;
+  display: flex;
+}
+
+.bottomDiv {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.numberOfPagesDetails {
+  display: flex;
+}
+.numberOfPagesDetails p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.pageButtons {
+  display: flex;
+  flex-direction: row;
+}
+
+.pageButtons p {
+  /* margin-top: 0;
+  margin-bottom: 0; */
+  margin: 0;
+  border: 1px solid gainsboro;
+  padding: 0 10px;
+  background-color: white;
+}
+
+.pageButtons button {
+  background-color: white;
+  border: 1px solid gainsboro;
+  color: gray;
+}

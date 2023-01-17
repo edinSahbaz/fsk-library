@@ -13,13 +13,14 @@ import {
   where,
   getDocs,
   onSnapshot,
+  deleteDoc,
 } from "firebase/firestore";
 import Image from "next/image";
 
 import { useUser } from "../../components/Layout";
 import { toast } from "react-hot-toast";
 import ImageModal from "../../components/ImageModal";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const BookDetails = () => {
   const router = useRouter();
@@ -63,8 +64,6 @@ const BookDetails = () => {
         if (data.numberOfPages) setNumberOfPages(data.numberOfPages);
         if (data.publisher) setPublisher(data.publisher);
         if (data.aboutAuthor) setAboutAuthor(data.aboutAuthor);
-      } else {
-        alert("Knjiga ne postoji!");
       }
     });
 
@@ -120,6 +119,7 @@ const BookDetails = () => {
         bookId,
         userId,
         addedTime: Timestamp.now(),
+        userName: userDB.name + " " + userDB.surname,
       })
         .then(() => {
           toast.success("Zathejv za knjigu poslan!");
@@ -131,6 +131,7 @@ const BookDetails = () => {
   };
 
   const updateBook = () => {
+    if(!bookId) return;
     const bookRef = doc(db, "books", bookId);
     const loading = updateDoc(bookRef, {
       name,
@@ -175,6 +176,45 @@ const BookDetails = () => {
     ISBN,
     numberOfPages,
   ]);
+
+  const deleteBook = async () => {
+    if (!bookId) return;
+
+    const colRef = collection(db, 'bookRequests');
+    const reqQ = query(colRef, where('bookId', '==', bookId));
+    const requests = await getDocs(reqQ);
+
+    requests.forEach(req => {
+      if(!req.exists()) return;
+      const reqRef = doc(db, 'bookRequests', req.id);
+      deleteDoc(reqRef)
+    })
+
+    const leaseQ = query(collection(db, 'leasedBooks'), where('bookId', '==', bookId));
+    const leases = await getDocs(leaseQ);
+
+    leases.forEach((lease) => {
+      if(!lease.exists()) return;
+      const leaseRef = doc(db, 'leasedBooks', lease.id);
+      deleteDoc(leaseRef);
+    })
+
+    const bookRef = doc(db, "books", bookId);
+    const loading = deleteDoc(bookRef).then((retData) => {
+      if(image) {
+        const storageRef = ref(storage, `books/${bookId}`)
+        deleteObject(storageRef);
+      }
+
+      router.replace('/');
+    });
+
+    toast.promise(loading, {
+      loading: "Brisanje knjige...",
+      success: "Brisanje knjige...",
+      error: "Brisanje knjige..."
+    })
+  }
 
   useEffect(() => {
     // Upload img
@@ -292,7 +332,10 @@ const BookDetails = () => {
                   </span>
                 </div>
                 <div className={styles.btn_reserve_book_div}>
+                  {canEdit ? 
+                  <button onClick={deleteBook}>Obriši knjigu</button> :
                   <button onClick={requestBook}>Posudi knjigu</button>
+                }
                 </div>
               </div>
             </div>
