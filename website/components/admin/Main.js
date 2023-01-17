@@ -40,6 +40,7 @@ const Main = () => {
 
   return (
     <div className={styles.main}>
+      <h2>Inbox</h2>
       <table className={styles.table} id="books">
         <thead>
           <tr>

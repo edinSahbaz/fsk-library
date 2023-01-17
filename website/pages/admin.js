@@ -44,7 +44,7 @@ const Admin = () => {
                   height="30px"
                   src="/Book.png"
                 ></Image>
-                Knjige
+                Dashboard
               </button>
             </div>
 
