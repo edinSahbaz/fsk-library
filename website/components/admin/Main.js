@@ -28,11 +28,11 @@ const Main = () => {
         <h2>Dashboard - Admin</h2>
         <div>
           {
-            messages.map((msg, i) => {
+            messages.map((msg, i) => (
               <div key={i}>
-                {msg.message.subject}
+                
               </div>
-            })
+            ))
           }
         </div>
       </div>
